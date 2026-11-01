@@ -179,7 +179,66 @@ dialog textarea{width:100%;min-height:200px;padding:12px;border-radius:10px;bord
 .toast.err{border-color:rgba(255,107,107,.5)}
 .toast.out{opacity:0;transform:translateY(-8px)}
 
+/* Pontuação ao vivo */
+.scorebar{display:flex;align-items:center;gap:12px;max-width:1000px;margin:0 auto 8px;height:52px}
+.scorebar canvas{flex:1;min-width:0;height:52px;border-radius:10px;background:rgba(255,255,255,.05)}
+.live{min-width:86px;text-align:right;font-family:var(--display)}
+.live b{display:block;font-size:30px;line-height:1;font-variant-numeric:tabular-nums}
+.live span{font-size:12px;color:rgba(255,255,255,.6)}
+.note{min-width:52px;text-align:center;font-weight:800;font-size:15px;color:var(--gold)}
+#fb{position:absolute;z-index:3;left:50%;top:9%;transform:translateX(-50%);font-family:var(--display);font-weight:800;font-size:clamp(24px,4vw,36px);pointer-events:none;opacity:0;white-space:nowrap}
+#fb.show{animation:fbpop 1.2s ease-out}
+@keyframes fbpop{0%{opacity:0;transform:translate(-50%,10px) scale(.8)}15%{opacity:1;transform:translate(-50%,0) scale(1.08)}70%{opacity:1}100%{opacity:0;transform:translate(-50%,-14px)}}
+.lvl-perfect{color:var(--gold);text-shadow:0 0 22px rgba(255,210,94,.6)}
+.lvl-great{color:#7dffb0}.lvl-good{color:#8fd3ff}.lvl-meh{color:#ffb38a}.lvl-miss{color:rgba(255,255,255,.5)}
+.pill{margin-right:6px}
+.pill.singer{background:var(--accent)}
+/* Resultado */
+#resOv{position:absolute;inset:0;z-index:8;background:rgba(7,5,11,.9);backdrop-filter:blur(10px);display:flex;justify-content:center;align-items:flex-start;padding:max(28px,env(safe-area-inset-top)) 20px 30px;overflow:auto;animation:pop .3s}
+.resbox{width:min(520px,100%);text-align:center;margin:auto 0}
+.resbox .who{color:rgba(255,255,255,.7);font-size:15px}
+.big{font-family:var(--display);font-weight:800;font-size:clamp(88px,24vw,150px);line-height:1;background:linear-gradient(135deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;margin-top:6px}
+.stars{font-size:30px;letter-spacing:4px;color:var(--gold)}
+.stars .off{color:rgba(255,255,255,.2)}
+.rtitle{font-family:var(--display);font-size:26px;font-weight:800;margin:4px 0 18px}
+.bars{display:grid;gap:10px;text-align:left;margin:0 auto 18px}
+.bar{display:grid;grid-template-columns:96px 1fr 40px;align-items:center;gap:10px;font-size:14px}
+.bar .tr{height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden}
+.bar .tr i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));border-radius:8px;transition:width 1s ease-out}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.8)}
+.applause{background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:16px;text-align:left}
+.meter{height:12px;border-radius:12px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:10px}
+.meter i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7dffb0,var(--gold),var(--accent));transition:width .1s}
+.sub2{color:var(--muted);line-height:1.5;font-size:14.5px;margin:4px 0 8px}
+/* Festa */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 10px 7px 7px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font-weight:600}
+.av{width:24px;height:24px;border-radius:50%;display:inline-grid;place-items:center;font-size:12px;color:#1a0710;font-weight:800;flex:none}
+.chip .rm{color:var(--muted);font-size:17px;line-height:1;padding:0 2px}
+.chip.pick{padding:10px 16px 10px 10px;font-size:16px}
+.chip.pick:hover{border-color:var(--accent)}
+.chip.next{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.chip small{color:var(--gold);font-weight:600}
+.rank{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
+.rank td,.rank th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left}
+.rank th{color:var(--muted);font-weight:600;font-size:12.5px}
+.rank .n{text-align:right;font-variant-numeric:tabular-nums}
+.hist{list-style:none;padding:0;margin:8px 0 0;font-size:14px;color:var(--muted)}
+.hist li{padding:5px 0;display:flex;gap:8px;justify-content:space-between}
+.hist b{color:var(--text)}
+.switch{display:flex;align-items:center;gap:10px;margin-top:16px;font-size:15px;color:var(--text)!important}
+.switch input{width:20px;height:20px;accent-color:var(--accent)}
+dialog{max-height:88vh;overflow:auto}
+dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
+/* Sincronizar no toque */
+.tapsync .cur{font-family:var(--display);font-weight:800;font-size:clamp(24px,5vw,46px);line-height:1.15;margin:12px 0 8px}
+.tapsync .nx{color:rgba(255,255,255,.5);font-size:17px;margin-bottom:22px;min-height:1.4em}
+.tapbtn{width:min(320px,80vw);height:92px;border-radius:24px;background:var(--gold);color:#1a0710;font-family:var(--display);font-size:22px;font-weight:800;transition:transform .08s}
+.tapbtn:active{transform:scale(.96)}
+
 @media (max-width:720px){
+  .scorebar{height:44px}.scorebar canvas{height:44px}
+  .live b{font-size:24px}
   .top{flex-wrap:wrap;gap:10px;padding:10px 14px}
   .search{order:3;flex-basis:100%}
   .acct{margin-left:auto}
@@ -205,6 +264,7 @@ dialog textarea{width:100%;min-height:200px;padding:12px;border-radius:10px;bord
     <input id="q" type="search" placeholder="Busque uma música ou artista no Spotify" autocomplete="off" enterkeyhint="search" aria-label="Buscar música">
   </form>
   <div class="acct">
+    <button class="ghost" id="partyBtn" title="Participantes, pontuação e ranking">🏆 Festa</button>
     <button class="ghost" id="nowBtn" hidden title="Abrir o palco com a música que já está tocando no seu Spotify">▶ Tocando agora</button>
     <button class="icon" id="gearBtn" title="Configurações" aria-label="Configurações"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
     <span class="status-dot" id="dot" title="Spotify desconectado"></span>
@@ -267,8 +327,10 @@ dialog textarea{width:100%;min-height:200px;padding:12px;border-radius:10px;bord
   <div class="stage-top">
     <button class="icon" id="closeStage" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
     <img id="stArt" alt="">
-    <div class="meta"><b id="stTitle"></b><span id="stArtist"></span><span class="pill" id="stVersion" hidden></span></div>
+    <div class="meta"><b id="stTitle"></b><span id="stArtist"></span><span class="pill singer" id="stSinger" hidden></span><span class="pill" id="stVersion" hidden></span></div>
     <div class="stage-actions">
+      <button class="ghost" id="finishBtn" hidden title="Encerrar e ver a nota agora">🏁 Ver nota</button>
+      <button class="ghost" id="tapSyncBtn" hidden title="Marcar o tempo de cada frase tocando na tela">⏱ Sincronizar letra</button>
       <button class="ghost" id="versBtn" title="Procurar no Spotify uma versão karaokê ou instrumental desta música">🎤 Versão sem voz</button>
       <select class="sel" id="device" aria-label="Onde tocar"></select>
       <button class="ghost" id="lrcBtn" title="Colar uma letra própria em formato LRC">Letra…</button>
@@ -278,11 +340,17 @@ dialog textarea{width:100%;min-height:200px;padding:12px;border-radius:10px;bord
 
   <div class="lyrics-wrap" id="wrap">
     <div id="countdown"></div>
+    <div id="fb"></div>
     <div id="lyrics"></div>
     <div id="lyricsMsg" hidden></div>
   </div>
 
   <div class="controls">
+    <div class="scorebar" id="scorebar" hidden>
+      <span class="note" id="noteLbl" title="Nota que você está cantando">–</span>
+      <canvas id="trail" aria-label="Trilha da sua voz"></canvas>
+      <div class="live"><b id="liveScore">0</b><span id="comboLbl">pontos</span></div>
+    </div>
     <div class="prog"><span id="tCur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" step="1" aria-label="Posição"><span id="tDur">0:00</span></div>
     <div class="row">
       <div class="sync" title="Ajuste fino da sincronia da letra">
@@ -300,6 +368,8 @@ dialog textarea{width:100%;min-height:200px;padding:12px;border-radius:10px;bord
     </div>
     <div class="credit" id="credit"></div>
   </div>
+
+  <div id="resOv" hidden></div>
 
   <aside id="drawer" hidden>
     <div class="dr-head"><h3>Versão sem voz</h3><button class="icon" id="closeDrawer" aria-label="Fechar">✕</button></div>
@@ -329,6 +399,25 @@ dialog textarea{width:100%;min-height:200px;padding:12px;border-radius:10px;bord
     <button class="btn" id="lrcRemove">Voltar à letra automática</button>
     <button class="btn" id="lrcClose">Cancelar</button>
   </div>
+</dialog>
+
+<dialog id="partyDlg">
+  <h3>🏆 Modo festa</h3>
+  <p class="sub2">Cadastre quem vai cantar. Em cada música, o app ouve pelo microfone e dá uma nota de 0 a 100. No fim, a plateia ainda pode render um bônus de aplauso.</p>
+  <form id="addPlayer" class="copyrow"><input class="field" id="pName" placeholder="Nome do participante" maxlength="20" autocomplete="off" style="margin:0"><button class="btn small primary">Adicionar</button></form>
+  <div class="chips" id="pList"></div>
+  <label class="switch"><input type="checkbox" id="scoreOn"> Pontuar as músicas (usa o microfone)</label>
+  <p class="sub2" style="margin-top:10px">Dica: deixe a música tocando numa caixa de som ou TV e segure o celular perto da boca de quem canta.</p>
+  <h4>Ranking</h4>
+  <div id="rankBox"></div>
+  <div class="actions"><button class="btn" id="clearRank">Zerar ranking</button><button class="btn primary" id="closeParty">Fechar</button></div>
+</dialog>
+
+<dialog id="singerDlg">
+  <h3>Quem vai cantar?</h3>
+  <p class="sub2" id="singerSong"></p>
+  <div class="chips" id="sList"></div>
+  <div class="actions"><button class="btn" id="noScore">Só cantar, sem nota</button><button class="btn" id="cancelSing">Cancelar</button></div>
 </dialog>
 
 <div id="toasts" aria-live="polite"></div>
@@ -739,6 +828,8 @@ function openStage(track, { autoplay = true, replace = false } = {}) {
   const wasOpen = St.open;
   if (track.demo) { if (Player.mode !== 'demo') Player.prevMode = Player.mode; Player.mode = 'demo'; }
   else if (Player.mode === 'demo') { Demo.stop(); Player.mode = Player.prevMode; Player.sync(0, false); Player.currentUri = null; }
+  if (Score.active) Score.cancel();
+  TS.on = false; $('#resOv').hidden = true; $('#tapSyncBtn').hidden = true; $('#stSinger').hidden = true;
   St.open = true; St.track = track; St.playTrack = track; St.lines = []; St.plain = ''; St.els = []; St.idx = -2; St.cd = -1;
   loadOffset();
   renderStageHeader();
@@ -757,6 +848,7 @@ function openStage(track, { autoplay = true, replace = false } = {}) {
 function closeStage(fromPop = false) {
   if (!St.open) return;
   St.open = false;
+  Score.cancel(); TS.on = false; $('#resOv').hidden = true;
   $('#stage').hidden = true; document.body.classList.remove('staged');
   if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
   if (Player.mode === 'demo') { Demo.stop(); Player.sync(0, false); Player.mode = Player.prevMode; Player.currentUri = null; }
@@ -795,8 +887,9 @@ function applyLyrics(res) {
   if (res?.synced) St.lines = parseLRC(res.synced);
   if (!St.lines.length && res?.plain) St.plain = res.plain.replace(/\[[^\]]*\]/g, '').trim();
   buildLyricsDOM();
+  $('#tapSyncBtn').hidden = !(!St.lines.length && St.plain);
   if (St.lines.length) setMsg('');
-  else if (St.plain) setMsg('');
+  else if (St.plain) { setMsg(''); toast('Essa letra veio sem os tempos. Toque em “⏱ Sincronizar letra” para marcar o ritmo uma vez, e ela fica salva.'); }
   else if (res?.instrumental) setMsg('<h3>Faixa instrumental</h3><p>Essa música não tem letra.</p>');
   else setMsg('<h3>Letra não encontrada</h3><p>Não achei letra sincronizada para essa faixa. Você pode colar uma letra sua (formato LRC) ou tentar outra versão da música na busca.</p><button class="btn primary" data-act="lrc">Colar letra</button>');
 }
@@ -881,8 +974,13 @@ function frame() {
 }
 
 function followTrack(item) {
-  if (!item || !St.open || St.track?.demo || performance.now() - Player.lastCmd < 6000) return;
+  if (!item || !St.open || St.track?.demo || TS.on || !$('#resOv').hidden || performance.now() - Player.lastCmd < 6000) return;
   if (sameTrack(item, St.playTrack) || sameTrack(item, St.track)) return;
+  if (Score.active) {
+    // a música acabou e o Spotify emendou outra: fecha a nota em vez de trocar
+    if (Score.maxPos > (St.playTrack?.durationMs || Infinity) * 0.85) { Score.finish(); return; }
+    Score.cancel();
+  }
   openStage(T(item), { autoplay: false, replace: true });
 }
 setInterval(async () => {
@@ -960,6 +1058,365 @@ function updatePlayIcons() {
   $('#playBtn').innerHTML = ic; $('#miniPlay').innerHTML = ic;
 }
 
+/* ---------- microfone e detecção de afinação (YIN) ---------- */
+const Mic = {
+  ctx: null, stream: null, src: null, an: null, buf: null, d: null,
+  async start() {
+    if (this.stream) return;
+    if (!navigator.mediaDevices?.getUserMedia) throw new Error('sem suporte a microfone');
+    this.stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    this.ctx ||= new (window.AudioContext || window.webkitAudioContext)();
+    await this.ctx.resume();
+    this.src = this.ctx.createMediaStreamSource(this.stream);
+    this.an = this.ctx.createAnalyser(); this.an.fftSize = 2048;
+    this.src.connect(this.an);
+    this.buf = new Float32Array(this.an.fftSize);
+  },
+  stop() {
+    this.stream?.getTracks().forEach(t => t.stop());
+    try { this.src?.disconnect(); } catch {}
+    this.stream = this.src = this.an = null;
+  },
+  read() {
+    if (!this.an) return null;
+    this.an.getFloatTimeDomainData(this.buf);
+    return this.analyze(this.buf, this.ctx.sampleRate);
+  },
+  analyze(x, sr) {
+    let s = 0; for (let i = 0; i < x.length; i++) s += x[i] * x[i];
+    const rms = Math.sqrt(s / x.length);
+    if (rms < 0.004) return { rms, f: -1 };
+    const W = 1024, minLag = Math.floor(sr / 1100), maxLag = Math.min(Math.floor(sr / 75), x.length - W - 2);
+    const d = (this.d && this.d.length === maxLag + 2) ? this.d : (this.d = new Float32Array(maxLag + 2));
+    let run = 0;
+    for (let tau = 1; tau <= maxLag + 1; tau++) {
+      let sum = 0;
+      for (let j = 0; j < W; j++) { const df = x[j] - x[j + tau]; sum += df * df; }
+      run += sum; d[tau] = run ? sum * tau / run : 1;
+    }
+    let best = -1;
+    for (let tau = minLag; tau <= maxLag; tau++) {
+      if (d[tau] < 0.15) { while (tau + 1 <= maxLag && d[tau + 1] < d[tau]) tau++; best = tau; break; }
+    }
+    if (best < 0) return { rms, f: -1 };
+    const a = d[best - 1], b = d[best], c = d[best + 1], den = a - 2 * b + c;
+    return { rms, f: sr / (best + (den ? (a - c) / (2 * den) : 0)) };
+  }
+};
+const NOTE_NAMES = ['Dó', 'Dó#', 'Ré', 'Ré#', 'Mi', 'Fá', 'Fá#', 'Sol', 'Sol#', 'Lá', 'Lá#', 'Si'];
+const noteName = m => { const r = Math.round(m); return NOTE_NAMES[((r % 12) + 12) % 12] + (Math.floor(r / 12) - 1); };
+const avg = a => a.length ? a.reduce((x, y) => x + y, 0) / a.length : 0;
+const std = a => { if (a.length < 2) return 0; const m = avg(a); return Math.sqrt(avg(a.map(v => (v - m) ** 2))); };
+// Afinação relativa: acha o "centro" de afinação do cantor e mede quanto cada nota foge do semitom mais próximo.
+function tuning(ms) {
+  if (!ms.length) return { dev: 50, off: 0 };
+  let cx = 0, sy = 0;
+  for (const m of ms) { const a = 2 * Math.PI * m; cx += Math.cos(a); sy += Math.sin(a); }
+  const off = Math.atan2(sy, cx) / (2 * Math.PI);
+  let dev = 0;
+  for (const m of ms) { const f = (m - off) - Math.round(m - off); dev += Math.abs(f); }
+  return { dev: dev / ms.length * 100, off };
+}
+const tuneScore = dev => clamp(1 - (dev - 12) / 22, 0, 1);
+// Tom: quanto das notas cabe numa mesma escala (cantar "dentro do tom").
+function keyFit(ms, off) {
+  const h = new Array(12).fill(0);
+  for (const m of ms) h[((Math.round(m - off) % 12) + 12) % 12]++;
+  const sc = [0, 2, 4, 5, 7, 9, 11]; let best = 0;
+  for (let r = 0; r < 12; r++) { let s = 0; for (const k of sc) s += h[(k + r) % 12]; best = Math.max(best, s); }
+  return ms.length ? best / ms.length : 0;
+}
+
+/* ---------- festa: participantes e ranking ---------- */
+const COLORS = ['#ff5c8a', '#ffd25e', '#7dffb0', '#8fd3ff', '#c79bff', '#ffb38a', '#5ce1e6', '#f9a8d4'];
+const Party = {
+  get d() { const d = LS.get('kk.party', null) || {}; return { players: d.players || [], history: d.history || [], on: d.on !== false }; },
+  save(d) { LS.set('kk.party', d); },
+  add(name) {
+    const d = this.d; name = name.trim().slice(0, 20); if (!name) return;
+    if (d.players.some(p => p.name.toLowerCase() === name.toLowerCase())) { toast('Esse nome já está na lista.'); return; }
+    d.players.push({ id: randomString(8), name, color: COLORS[d.players.length % COLORS.length] }); this.save(d);
+  },
+  remove(id) { const d = this.d; d.players = d.players.filter(p => p.id !== id); this.save(d); },
+  player(id) { return this.d.players.find(p => p.id === id); },
+  next() {
+    const d = this.d; if (!d.players.length) return null;
+    const last = {}; d.history.forEach((h, i) => { last[h.pid] = i; });
+    return [...d.players].sort((a, b) => (last[a.id] ?? -1) - (last[b.id] ?? -1))[0];
+  },
+  record(e) { const d = this.d; d.history.push(e); if (d.history.length > 300) d.history.shift(); this.save(d); },
+  updateLast(patch) { const d = this.d; if (d.history.length) Object.assign(d.history[d.history.length - 1], patch); this.save(d); }
+};
+const avatar = p => `<span class="av" style="background:${esc(p.color)}">${esc((p.name[0] || '?').toUpperCase())}</span>`;
+function renderParty() {
+  const d = Party.d;
+  $('#pList').innerHTML = d.players.length
+    ? d.players.map(p => `<span class="chip">${avatar(p)}${esc(p.name)}<button class="rm" data-rm="${p.id}" aria-label="Remover ${esc(p.name)}">×</button></span>`).join('')
+    : '<span class="sub2">Ninguém cadastrado ainda.</span>';
+  $('#scoreOn').checked = d.on;
+  const stats = d.players.map(p => {
+    const h = d.history.filter(x => x.pid === p.id);
+    return { p, n: h.length, best: h.length ? Math.max(...h.map(x => x.total)) : 0, avg: Math.round(avg(h.map(x => x.total))) };
+  }).filter(s => s.n).sort((a, b) => b.best - a.best || b.avg - a.avg);
+  const medal = ['🥇', '🥈', '🥉'];
+  $('#rankBox').innerHTML = stats.length
+    ? `<table class="rank"><tr><th></th><th>Cantor</th><th class="n">Melhor</th><th class="n">Média</th><th class="n">Músicas</th></tr>${stats.map((s, i) => `<tr><td>${medal[i] || (i + 1) + 'º'}</td><td>${avatar(s.p)} ${esc(s.p.name)}</td><td class="n"><b>${s.best}</b></td><td class="n">${s.avg}</td><td class="n">${s.n}</td></tr>`).join('')}</table>
+       <h4>Últimas apresentações</h4><ul class="hist">${d.history.slice(-8).reverse().map(h => `<li><span><b>${esc(h.name)}</b> · ${esc(h.song)}</span><span>${h.total}${h.bonus ? ` <small>(+${h.bonus} 👏)</small>` : ''}</span></li>`).join('')}</ul>`
+    : '<p class="sub2">Ninguém cantou valendo nota ainda.</p>';
+}
+let pendingSong = null;
+function startSong(track, opts = {}) {
+  const d = Party.d;
+  if (!d.on || !d.players.length) { openStage(track, opts); return; }
+  pendingSong = { track, opts };
+  $('#singerSong').textContent = `${cleanTitle(track.name)} — ${track.artists.join(', ')}`;
+  const nx = Party.next();
+  $('#sList').innerHTML = d.players.map(p => `<button class="chip pick${p.id === nx?.id ? ' next' : ''}" data-pid="${p.id}">${avatar(p)}${esc(p.name)}${p.id === nx?.id ? ' <small>· é a vez</small>' : ''}</button>`).join('');
+  $('#singerDlg').showModal();
+}
+
+/* ---------- pontuação ---------- */
+function showFeedback(txt, lvl) {
+  const el = $('#fb'); el.className = ''; el.textContent = txt; void el.offsetWidth; el.className = 'show lvl-' + lvl;
+}
+const Score = {
+  active: false, player: null, timer: null,
+  reset() {
+    Object.assign(this, { rmsHist: [], trail: [], lines: {}, glob: { tot: 0, v: 0 }, pitched: [], db: [], prevMidi: null, curLine: -2,
+      lineScores: {}, combo: 0, bestCombo: 0, maxPos: 0, voicedTotal: 0, center: null, lastNote: '' });
+  },
+  async begin(player) {
+    try { await Mic.start(); }
+    catch { toast('Sem acesso ao microfone — essa música fica sem nota. Libere o microfone para este site nas configurações do navegador.', 'err'); return; }
+    this.reset(); this.player = player; this.active = true;
+    $('#stSinger').textContent = '🎤 ' + player.name; $('#stSinger').hidden = false;
+    $('#scorebar').hidden = false; $('#finishBtn').hidden = false;
+    $('#liveScore').textContent = '0'; $('#comboLbl').textContent = 'pontos'; $('#noteLbl').textContent = '–';
+    clearInterval(this.timer); this.timer = setInterval(() => this.tick(), 50);
+    requestAnimationFrame(() => St.open && St.lines.length && centerOn(Math.max(0, St.idx), true));
+  },
+  cancel() {
+    clearInterval(this.timer); this.active = false; Mic.stop();
+    $('#scorebar').hidden = true; $('#finishBtn').hidden = true; $('#stSinger').hidden = true;
+  },
+  tick() {
+    if (!this.active || !St.open) return;
+    const a = Mic.read(); if (!a) return;
+    const pos = Player.now(), dur = Player.duration || St.playTrack?.durationMs || 0;
+    this.maxPos = Math.max(this.maxPos, pos);
+    if (dur && this.maxPos > dur * 0.9 && (pos >= dur - 1200 || (!Player.playing && pos < 3000))) { this.finish(); return; }
+    if (!Player.playing || TS.on) { this.draw(pos); return; }
+    // ruído de fundo (inclui a música vazando no microfone) = percentil 20 dos últimos ~10 s
+    this.rmsHist.push(a.rms); if (this.rmsHist.length > 200) this.rmsHist.shift();
+    const sorted = [...this.rmsHist].sort((x, y) => x - y);
+    const bg = sorted[Math.floor(sorted.length * 0.2)] || 0;
+    const voiced = a.rms > Math.max(0.012, bg * 2.2);
+    const midi = voiced && a.f > 0 ? 69 + 12 * Math.log2(a.f / 440) : null;
+    if (voiced) { this.voicedTotal++; this.db.push(20 * Math.log10(a.rms)); }
+    const stable = midi != null && this.prevMidi != null && Math.abs(midi - this.prevMidi) < 0.35;
+    if (stable) this.pitched.push(midi);
+    this.prevMidi = midi;
+    this.trail.push({ t: pos, m: midi });
+    while (this.trail.length && this.trail[0].t < pos - 6000) this.trail.shift();
+    const nn = midi != null ? noteName(midi) : '–';
+    if (nn !== this.lastNote) { $('#noteLbl').textContent = nn; this.lastNote = nn; }
+    if (St.lines.length) {
+      const lt = pos - St.offset, i = findIndex(lt);
+      if (i !== this.curLine) { if (this.curLine >= 0) this.evalLine(this.curLine); this.curLine = i; }
+      const L = St.lines[i];
+      if (L && L.text) {
+        const N = St.lines[i + 1];
+        const win = Math.min((N ? N.t : L.t + 6000) - L.t, Math.max(2500, L.text.length * 110) + 800);
+        if (lt - L.t <= win) {
+          const s = this.lines[i] ||= { tot: 0, v: 0, m: [] };
+          s.tot++; if (voiced) s.v++; if (stable) s.m.push(midi);
+        }
+      }
+    } else if (pos > 8000) { this.glob.tot++; if (voiced) this.glob.v++; }
+    this.draw(pos);
+  },
+  evalLine(i) {
+    const s = this.lines[i]; if (!s || s.tot < 8) return;
+    const cov = Math.min(1, s.v / (s.tot * 0.55));
+    const tune = s.m.length >= 6 ? tuneScore(tuning(s.m).dev) : (cov > 0.3 ? 0.5 : 0);
+    const sc = cov * 0.7 + tune * 0.3;
+    this.lineScores[i] = sc;
+    if (sc >= 0.7) { this.combo++; this.bestCombo = Math.max(this.bestCombo, this.combo); } else this.combo = 0;
+    const lv = sc >= 0.85 ? ['Perfeito!', 'perfect'] : sc >= 0.7 ? ['Ótimo!', 'great'] : sc >= 0.5 ? ['Bom!', 'good'] : sc >= 0.25 ? ['Quase…', 'meh'] : ['Ops…', 'miss'];
+    showFeedback(lv[0] + (this.combo >= 3 ? `  ×${this.combo}` : ''), lv[1]);
+    const v = Object.values(this.lineScores);
+    $('#liveScore').textContent = Math.round(100 * avg(v));
+    $('#comboLbl').textContent = this.combo >= 2 ? `combo ×${this.combo}` : 'pontos';
+  },
+  draw(pos) {
+    const c = $('#trail'), w = c.clientWidth, h = c.clientHeight; if (!w) return;
+    const dpr = window.devicePixelRatio || 1;
+    if (c.width !== Math.round(w * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
+    const g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    g.strokeStyle = 'rgba(255,255,255,.07)'; g.lineWidth = 1;
+    for (let k = 1; k < 4; k++) { g.beginPath(); g.moveTo(0, h * k / 4); g.lineTo(w, h * k / 4); g.stroke(); }
+    const last = this.trail.filter(p => p.m != null).slice(-1)[0];
+    if (last) this.center = this.center == null ? last.m : this.center * 0.95 + last.m * 0.05;
+    if (this.center == null) return;
+    const grad = g.createLinearGradient(0, 0, w, 0); grad.addColorStop(0, 'rgba(255,92,138,.2)'); grad.addColorStop(1, '#ffd25e');
+    g.strokeStyle = grad; g.lineWidth = 3; g.lineCap = 'round'; g.lineJoin = 'round';
+    g.beginPath(); let prev = null;
+    for (const p of this.trail) {
+      if (p.m == null) { prev = null; continue; }
+      const x = w - (pos - p.t) / 6000 * w, y = clamp(h / 2 - (p.m - this.center) / 14 * h, 3, h - 3);
+      if (prev == null || Math.abs(p.m - prev) > 2) g.moveTo(x, y); else g.lineTo(x, y);
+      prev = p.m;
+    }
+    g.stroke();
+  },
+  finish() {
+    if (!this.active) return;
+    if (this.curLine >= 0) this.evalLine(this.curLine);
+    clearInterval(this.timer); this.active = false;
+    $('#scorebar').hidden = true; $('#finishBtn').hidden = true;
+    let presence;
+    if (St.lines.length) {
+      const covs = Object.values(this.lines).filter(s => s.tot >= 8).map(s => Math.min(1, s.v / (s.tot * 0.55)));
+      presence = avg(covs);
+    } else presence = this.glob.tot ? Math.min(1, this.glob.v / (this.glob.tot * 0.45)) : 0;
+    const enough = this.pitched.length >= 20;
+    const t = tuning(this.pitched);
+    const tune = enough ? tuneScore(t.dev) : 0;
+    const key = enough ? clamp((keyFit(this.pitched, t.off) - 0.62) / 0.3, 0, 1) : 0;
+    const expr = this.db.length >= 20 ? clamp(0.3 + std(this.db) / 7, 0, 1) : 0;
+    const raw = 0.45 * presence + 0.25 * tune + 0.18 * key + 0.12 * expr;
+    const silent = this.voicedTotal < 40;
+    const score = silent ? 0 : Math.round(100 * Math.pow(raw, 0.85));
+    if (Player.playing) Player.toggle();
+    const p = this.player;
+    const entry = { pid: p.id, name: p.name, song: cleanTitle(St.track.name), artist: St.track.artists[0] || '', score, bonus: 0, total: score, combo: this.bestCombo, date: Date.now() };
+    Party.record(entry);
+    showResults(entry, { presence, tune, key, expr }, silent);
+  }
+};
+
+function showResults(e, parts, silent) {
+  const nx = Party.next();
+  const stars = n => '★'.repeat(n) + `<span class="off">${'★'.repeat(5 - n)}</span>`;
+  const starN = s => s >= 90 ? 5 : s >= 75 ? 4 : s >= 60 ? 3 : s >= 40 ? 2 : 1;
+  const title = s => s >= 90 ? 'Estrela do palco!' : s >= 75 ? 'Arrasou!' : s >= 60 ? 'Mandou bem!' : s >= 40 ? 'Tá esquentando!' : 'Bora de novo!';
+  const bar = (lbl, v) => `<div class="bar"><span>${lbl}</span><div class="tr"><i data-w="${Math.round(v * 100)}"></i></div><span class="v">${Math.round(v * 100)}</span></div>`;
+  const ov = $('#resOv');
+  ov.innerHTML = `<div class="resbox">
+    <div class="who">${avatar(Party.player(e.pid) || { name: e.name, color: '#ffd25e' })} ${esc(e.name)} · ${esc(e.song)}</div>
+    <div class="big" id="bigScore">0</div>
+    <div class="stars" id="starsBox">${stars(starN(e.score))}</div>
+    <div class="rtitle" id="rTitle">${title(e.score)}</div>
+    ${silent ? '<p class="sub2">Não consegui ouvir você cantar. Confira se o site tem permissão de microfone e segure o celular mais perto da boca.</p>' : ''}
+    <div class="bars">
+      ${bar('Ritmo', parts.presence)}${bar('Afinação', parts.tune)}${bar('Tom', parts.key)}${bar('Expressão', parts.expr)}
+    </div>
+    ${e.combo >= 3 ? `<p class="sub2">Maior sequência: <b style="color:var(--gold)">${e.combo} frases seguidas</b> acima de “Ótimo”.</p>` : ''}
+    <div class="applause">
+      <b>👏 Aplauso da plateia</b>
+      <div class="sub2">Toque no botão e peça pra galera aplaudir e gritar por 5 segundos. Vale até +10 pontos.</div>
+      <button class="btn primary" id="clapBtn">Medir aplauso</button>
+      <div class="meter"><i id="clapMeter"></i></div>
+      <div class="sub2" id="clapRes"></div>
+    </div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn" id="resRank">🏆 Ranking</button>
+      <button class="btn primary" id="resNext">${nx ? 'Próximo: ' + esc(nx.name) : 'Próxima música'}</button>
+    </div>
+  </div>`;
+  ov.hidden = false;
+  countUp($('#bigScore'), 0, e.score, 1300);
+  requestAnimationFrame(() => setTimeout(() => ov.querySelectorAll('.tr i').forEach(i => { i.style.width = i.dataset.w + '%'; }), 60));
+  $('#clapBtn').onclick = () => measureApplause(e, starN, stars, title);
+  $('#resRank').onclick = () => { renderParty(); $('#partyDlg').showModal(); };
+  $('#resNext').onclick = () => {
+    const n = Party.next();
+    closeStage();
+    $('#q').value = ''; $('#q').focus();
+    if (n) toast(`Vez de ${n.name}! Escolha a música na busca.`);
+  };
+}
+function countUp(el, from, to, ms) {
+  const t0 = performance.now();
+  const step = now => { const k = clamp((now - t0) / ms, 0, 1); el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
+async function measureApplause(e, starN, stars, title) {
+  const btn = $('#clapBtn'); btn.disabled = true;
+  try { await Mic.start(); } catch { toast('Sem acesso ao microfone.', 'err'); btn.disabled = false; return; }
+  // 1 s de referência do ambiente, depois 5 s de aplauso
+  let base = []; let sum = 0, n = 0;
+  const t0 = performance.now();
+  btn.textContent = 'Silêncio um instante…';
+  await new Promise(res => {
+    const iv = setInterval(() => {
+      const a = Mic.read(); if (!a) return;
+      const el = performance.now() - t0;
+      if (el < 1000) { base.push(a.rms); return; }
+      const b = Math.max(0.003, avg(base));
+      const db = Math.max(0, 20 * Math.log10(Math.max(a.rms, 1e-5) / b));
+      sum += db; n++;
+      btn.textContent = `Aplaudam! ${Math.ceil((6000 - el) / 1000)}…`;
+      $('#clapMeter').style.width = clamp(db / 30, 0, 1) * 100 + '%';
+      if (el >= 6000) { clearInterval(iv); res(); }
+    }, 60);
+  });
+  Mic.stop();
+  const bonus = Math.round(clamp((sum / Math.max(1, n) - 4) / 18, 0, 1) * 10);
+  const total = Math.min(100, e.score + bonus);
+  Party.updateLast({ bonus, total });
+  $('#clapMeter').style.width = bonus * 10 + '%';
+  btn.textContent = 'Medido!';
+  $('#clapRes').innerHTML = bonus ? `<b style="color:var(--gold)">+${bonus} pontos de aplauso!</b> Nota final: <b>${total}</b>` : 'A plateia tava tímida… sem bônus dessa vez.';
+  if (bonus) {
+    countUp($('#bigScore'), e.score, total, 900);
+    $('#starsBox').innerHTML = stars(starN(total)); $('#rTitle').textContent = title(total);
+  }
+}
+
+/* ---------- sincronizar letra no toque ---------- */
+const TS = { on: false, lines: [], times: [], k: 0 };
+const lrcTime = ms => { const s = Math.max(0, ms) / 1000; return `[${String(Math.floor(s / 60)).padStart(2, '0')}:${(s % 60).toFixed(2).padStart(5, '0')}]`; };
+function startTapSync() {
+  const lines = St.plain.split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+  if (!lines.length) return;
+  Object.assign(TS, { on: true, lines, times: [], k: 0 });
+  $('#lyrics').innerHTML = ''; $('#tapSyncBtn').hidden = true;
+  Player.seek(0).then(() => { if (!Player.playing) Player.toggle(); });
+  renderTapSync();
+  toast('Toque em “Começou!” bem na hora em que cada frase começa. Pode usar a barra de espaço no computador.');
+}
+function renderTapSync() {
+  const { lines, k } = TS;
+  setMsg(`<div class="tapsync">
+    <p class="sub2">Frase ${k + 1} de ${lines.length}</p>
+    <div class="cur">${esc(lines[k])}</div>
+    <div class="nx">${lines[k + 1] ? 'depois: ' + esc(lines[k + 1]) : '— última frase —'}</div>
+    <button class="tapbtn" data-act="tap">Começou! 👆</button>
+    <div class="actions" style="justify-content:center">
+      <button class="btn small" data-act="undo" ${k ? '' : 'disabled'}>Desfazer</button>
+      <button class="btn small" data-act="tsdone" ${k ? '' : 'disabled'}>Concluir</button>
+      <button class="btn small" data-act="tscancel">Cancelar</button>
+    </div></div>`);
+}
+function tapSyncAction(act) {
+  if (act === 'tap') { TS.times[TS.k] = Math.round(Player.now()); TS.k++; if (TS.k >= TS.lines.length) finishTapSync(); else renderTapSync(); }
+  else if (act === 'undo' && TS.k > 0) { TS.k--; TS.times.length = TS.k; Player.seek(Math.max(0, (TS.times[TS.k - 1] ?? 0) - 1500)); renderTapSync(); }
+  else if (act === 'tsdone') finishTapSync();
+  else if (act === 'tscancel') { TS.on = false; setMsg(''); buildLyricsDOM(); $('#tapSyncBtn').hidden = false; }
+}
+function finishTapSync() {
+  TS.on = false;
+  const n = TS.times.length; if (!n) return tapSyncAction('tscancel');
+  const out = TS.lines.slice(0, n).map((l, i) => lrcTime(TS.times[i]) + ' ' + l);
+  out.push(lrcTime(TS.times[n - 1] + 6000) + ' ');
+  const lrc = out.join('\n');
+  LS.set('kk.lrc.' + St.track.id, lrc);
+  applyLyrics({ synced: lrc, plain: St.plain, source: 'Letra sincronizada por você' });
+  Player.seek(0);
+  toast('Letra sincronizada e salva! Da próxima vez ela já vem pronta.');
+}
+
 /* ---------- telas ---------- */
 function showHome() {
   const logged = Auth.loggedIn;
@@ -998,14 +1455,33 @@ function wire() {
   $('#copyRedir').onclick = () => navigator.clipboard?.writeText(REDIRECT).then(() => toast('Endereço copiado.'), () => toast('Selecione e copie o endereço manualmente.'));
   $('#cid').addEventListener('change', e => { Auth.clientId = e.target.value; });
   $('#loginBtn').onclick = () => { Auth.clientId = $('#cid').value; Auth.login(); };
-  $('#demoBtn').onclick = () => openStage(DEMO_TRACK);
+  $('#demoBtn').onclick = () => startSong(DEMO_TRACK);
+
+  // festa
+  $('#partyBtn').onclick = () => { renderParty(); $('#partyDlg').showModal(); };
+  $('#addPlayer').addEventListener('submit', e => { e.preventDefault(); Party.add($('#pName').value); $('#pName').value = ''; renderParty(); $('#pName').focus(); });
+  $('#pList').addEventListener('click', e => { const b = e.target.closest('[data-rm]'); if (b) { Party.remove(b.dataset.rm); renderParty(); } });
+  $('#scoreOn').addEventListener('change', e => { const d = Party.d; d.on = e.target.checked; Party.save(d); });
+  $('#clearRank').onclick = () => { if (confirm('Apagar todas as notas do ranking?')) { const d = Party.d; d.history = []; Party.save(d); renderParty(); } };
+  $('#closeParty').onclick = () => $('#partyDlg').close();
+  $('#sList').addEventListener('click', e => {
+    const b = e.target.closest('[data-pid]'); if (!b || !pendingSong) return;
+    $('#singerDlg').close();
+    const { track, opts } = pendingSong; pendingSong = null;
+    openStage(track, opts);
+    Score.begin(Party.player(b.dataset.pid));
+  });
+  $('#noScore').onclick = () => { $('#singerDlg').close(); if (pendingSong) { openStage(pendingSong.track, pendingSong.opts); pendingSong = null; } };
+  $('#cancelSing').onclick = () => { $('#singerDlg').close(); pendingSong = null; };
+  $('#finishBtn').onclick = () => Score.finish();
+  $('#tapSyncBtn').onclick = startTapSync;
   $('#copyLogin').onclick = () => { Auth.clientId = $('#cid').value; Auth.copyLoginLink(); };
 
   let deb;
   $('#searchForm').addEventListener('submit', e => { e.preventDefault(); clearTimeout(deb); $('#q').blur(); doSearch($('#q').value); });
   $('#q').addEventListener('input', e => { clearTimeout(deb); const v = e.target.value.trim(); if (v.length >= 2) deb = setTimeout(() => doSearch(v), 450); });
   $('#moreBtn').onclick = () => doSearch(S.q, true);
-  $('#list').addEventListener('click', e => { const b = e.target.closest('.trk'); if (b) openStage(S.items[+b.dataset.i]); });
+  $('#list').addEventListener('click', e => { const b = e.target.closest('.trk'); if (b) startSong(S.items[+b.dataset.i]); });
   $('#nowBtn').onclick = singCurrent;
 
   $('#gearBtn').onclick = () => { $('#cid2').value = Auth.clientId; $('#settingsDlg').showModal(); };
@@ -1036,7 +1512,10 @@ function wire() {
     toast('Pronto! A 1ª frase foi alinhada a este momento.');
   };
   $('#lyrics').addEventListener('click', e => { const ln = e.target.closest('.ln'); if (ln) Player.seek(St.lines[+ln.dataset.i].t + St.offset - 150); });
-  $('#lyricsMsg').addEventListener('click', e => { if (e.target.closest('[data-act="lrc"]')) openLrc(); });
+  $('#lyricsMsg').addEventListener('click', e => {
+    const b = e.target.closest('[data-act]'); if (!b) return;
+    if (b.dataset.act === 'lrc') openLrc(); else tapSyncAction(b.dataset.act);
+  });
 
   $('#versBtn').onclick = openVersions;
   $('#closeDrawer').onclick = () => { $('#drawer').hidden = true; };
@@ -1063,7 +1542,8 @@ function wire() {
   document.addEventListener('visibilitychange', () => { if (!document.hidden && St.open) requestWake(); });
   document.addEventListener('keydown', e => {
     if (!St.open || e.target.closest('input,textarea,select,dialog')) return;
-    if (e.code === 'Space') { e.preventDefault(); Player.toggle(); }
+    if (e.code === 'Space' && TS.on) { e.preventDefault(); tapSyncAction('tap'); }
+    else if (e.code === 'Space') { e.preventDefault(); Player.toggle(); }
     else if (e.key === 'ArrowLeft') Player.seek(Player.now() - 5000);
     else if (e.key === 'ArrowRight') Player.seek(Player.now() + 5000);
     else if (e.key === '[') { St.offset -= 250; saveOffset(); }
@@ -1089,7 +1569,7 @@ function openLrc() { $('#lrcText').value = LS.get('kk.lrc.' + St.track.id, ''); 
 })();
 
 // exposto só para testes no console
-window.__karaoke = { parseLRC, cleanTitle, origArtist, Player, St };
+window.__karaoke = { parseLRC, cleanTitle, origArtist, Player, St, Score, Mic, Party, applyLyrics, tuning, keyFit };
 })();
 </script>
 </body>
