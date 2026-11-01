@@ -236,6 +236,85 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
 .tapbtn{width:min(320px,80vw);height:92px;border-radius:24px;background:var(--gold);color:#1a0710;font-family:var(--display);font-size:22px;font-weight:800;transition:transform .08s}
 .tapbtn:active{transform:scale(.96)}
 
+/* Busca de letra e biblioteca */
+.lyrres{display:grid;gap:4px;margin-top:8px;max-height:40vh;overflow:auto}
+.lyr{width:100%;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:9px 10px;border-radius:10px;text-align:left;background:var(--panel2)}
+.lyr:hover{outline:1px solid var(--accent)}
+.lyr .t{font-weight:600;font-size:14.5px}
+.lyr .a{color:var(--muted);font-size:13px}
+.badge{font-size:11px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(125,255,176,.15);color:#7dffb0;white-space:nowrap}
+.badge.plain{background:rgba(255,255,255,.08);color:var(--muted)}
+.hist .rm{color:var(--muted);font-size:17px;padding:0 4px}
+
+/* Animações: pista, mascote, plateia, partículas */
+#hwy,#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#hwy{z-index:0}
+#fx{z-index:9}
+#crowdRow{position:relative;z-index:1;height:clamp(44px,8vh,120px);margin-bottom:-14px;pointer-events:none}
+#crowd{position:absolute;inset:0;display:flex;justify-content:space-around;align-items:flex-end;overflow:hidden;padding-left:clamp(60px,9vw,170px)}
+.fan{width:clamp(28px,3.6vw,66px);flex:none;animation:bob var(--beat,.6s) ease-in-out infinite alternate;animation-delay:var(--d,0s)}
+.fan svg{display:block;width:100%;height:auto}
+.fan .arms{opacity:0;transition:opacity .2s}
+.fan .light{opacity:0}
+#crowd.cheer .fan{animation:cheer .32s ease-in-out infinite alternate}
+#crowd.cheer .fan .arms{opacity:1}
+#crowd.lights .fan .light{opacity:1;animation:blink 1.1s ease-in-out infinite;animation-delay:var(--d,0s)}
+@keyframes bob{from{transform:translateY(5px)}to{transform:translateY(0)}}
+@keyframes cheer{from{transform:translateY(2px)}to{transform:translateY(-10px)}}
+@keyframes blink{50%{opacity:.25}}
+#mascot{position:absolute;left:max(8px,1.5vw);bottom:6px;width:clamp(58px,8vw,150px);z-index:2;filter:drop-shadow(0 6px 16px rgba(0,0,0,.55))}
+#mascot svg{display:block;width:100%;overflow:visible}
+#mascot g{transform-box:fill-box}
+#mascot .m-body{transform-origin:50% 100%;animation:groove var(--beat,.6s) ease-in-out infinite alternate}
+#mascot .m-arm.l{transform-origin:100% 100%;animation:armL var(--beat,.6s) ease-in-out infinite alternate}
+#mascot .m-arm.r{transform-origin:0% 100%;animation:armR var(--beat,.6s) ease-in-out infinite alternate}
+#mascot .m-leg.l{transform-origin:50% 0;animation:legL var(--beat,.6s) ease-in-out infinite alternate}
+#mascot .m-leg.r{transform-origin:50% 0;animation:legL var(--beat,.6s) ease-in-out infinite alternate-reverse}
+@keyframes groove{from{transform:translateY(0) rotate(-6deg)}to{transform:translateY(-7px) rotate(6deg)}}
+@keyframes armL{from{transform:rotate(14deg)}to{transform:rotate(-30deg)}}
+@keyframes armR{from{transform:rotate(30deg)}to{transform:rotate(-14deg)}}
+@keyframes legL{from{transform:rotate(-8deg)}to{transform:rotate(8deg)}}
+#mascot.jump .m-body{animation:mjump .75s cubic-bezier(.2,.8,.3,1)}
+@keyframes mjump{0%{transform:translateY(0)}45%{transform:translateY(-40px) rotate(180deg)}100%{transform:translateY(0) rotate(360deg)}}
+#mascot.hype .m-arm.l{animation:hypeL .22s ease-in-out infinite alternate}
+#mascot.hype .m-arm.r{animation:hypeR .22s ease-in-out infinite alternate}
+@keyframes hypeL{from{transform:rotate(40deg)}to{transform:rotate(70deg)}}
+@keyframes hypeR{from{transform:rotate(-40deg)}to{transform:rotate(-70deg)}}
+#mascot.sad .m-body{animation:msad 1s ease}
+@keyframes msad{30%{transform:translateY(4px) rotate(-10deg) scaleY(.92)}100%{transform:none}}
+#stage.paused #mascot *,#stage.paused .fan{animation-play-state:paused!important}
+#stage.onfire::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 60px rgba(255,120,40,.55),inset 0 -40px 90px rgba(255,92,138,.35);animation:fire .5s ease-in-out infinite alternate}
+@keyframes fire{to{box-shadow:inset 0 0 90px rgba(255,160,40,.7),inset 0 -60px 120px rgba(255,92,138,.45)}}
+#stage[data-fx="off"] #crowdRow,#stage[data-fx="off"] #hwy{display:none}
+#stage[data-fx="lite"] #crowd,#stage[data-fx="lite"] #hwy{display:none}
+#stage[data-fx="lite"] #crowdRow{height:clamp(40px,6vh,90px)}
+.scorebar.remote canvas,.scorebar.remote .note{visibility:hidden}
+
+/* Modo TV (tela de 3 metros) */
+#tvIdle{position:fixed;inset:0;z-index:15;display:grid;place-items:center;text-align:center;background:radial-gradient(ellipse at 50% 20%,#3a1440 0,var(--bg) 70%);padding:40px}
+.tv-wrap{max-width:1100px}
+#tvIdle h1{font-family:var(--display);font-size:clamp(40px,5vw,76px);letter-spacing:-.02em;margin:34px 0 10px}
+.tvsub{color:var(--muted);font-size:clamp(18px,1.8vw,28px);margin:0}
+.tvcode{display:inline-flex;flex-direction:column;gap:6px;margin-top:34px;padding:22px 40px;border-radius:24px;background:var(--panel);border:1px solid var(--line)}
+.tvcode span{color:var(--muted);font-size:20px}
+.tvcode b{font-family:ui-monospace,monospace;font-size:clamp(48px,6vw,92px);letter-spacing:.18em;color:var(--gold)}
+.tvcode small{color:var(--muted);font-size:18px}
+#tvLast{margin-top:26px;color:var(--muted);font-size:22px}
+#tvLast b{color:var(--text)}
+body.tv .top,body.tv main,body.tv #mini{display:none!important}
+body.tv #closeStage,body.tv #versBtn,body.tv #device,body.tv #lrcBtn,body.tv #tapSyncBtn,body.tv #finishBtn,body.tv #markBtn,body.tv .vol{display:none!important}
+body.tv .ln{font-size:clamp(40px,4.6vw,96px)}
+body.tv .stage-top img{width:72px;height:72px}
+body.tv .meta b{font-size:30px}
+body.tv .meta span{font-size:20px}
+body.tv .controls{padding:10px 60px 30px}
+body.tv .play{width:72px;height:72px}
+body.tv .live b{font-size:44px}
+body.tv #fb{font-size:clamp(36px,4vw,64px)}
+body.tv #resOv .actions{display:none}
+body.tv .applause button{display:none}
+body.tv .stage-actions{width:auto}
+
 @media (max-width:720px){
   .scorebar{height:44px}.scorebar canvas{height:44px}
   .live b{font-size:24px}
@@ -324,6 +403,7 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
 
 <section id="stage" hidden aria-label="Palco do karaokê">
   <div class="bg" id="stageBg"></div>
+  <canvas id="hwy" aria-hidden="true"></canvas>
   <div class="stage-top">
     <button class="icon" id="closeStage" aria-label="Voltar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 18l-6-6 6-6"/></svg></button>
     <img id="stArt" alt="">
@@ -343,6 +423,36 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
     <div id="fb"></div>
     <div id="lyrics"></div>
     <div id="lyricsMsg" hidden></div>
+  </div>
+
+  <div id="crowdRow" aria-hidden="true">
+    <div id="mascot">
+      <svg viewBox="0 0 100 130">
+        <defs>
+          <linearGradient id="mHead" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff5c8a"/><stop offset="1" stop-color="#ffd25e"/></linearGradient>
+          <pattern id="mMesh" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.1" fill="rgba(26,7,16,.18)"/></pattern>
+        </defs>
+        <g class="m-body">
+          <g class="m-leg l"><path d="M43 100 L40 112" stroke="#fff" stroke-width="5" stroke-linecap="round"/><ellipse cx="38" cy="114" rx="8" ry="4.5" fill="#fff"/></g>
+          <g class="m-leg r"><path d="M57 100 L60 112" stroke="#fff" stroke-width="5" stroke-linecap="round"/><ellipse cx="62" cy="114" rx="8" ry="4.5" fill="#fff"/></g>
+          <g class="m-arm l"><path d="M36 72 Q20 70 14 56" stroke="#ffd25e" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="13" cy="53" r="6.5" fill="#fff"/></g>
+          <g class="m-arm r"><path d="M64 72 Q80 70 86 56" stroke="#ffd25e" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="87" cy="53" r="6.5" fill="#fff"/></g>
+          <rect x="35" y="60" width="30" height="44" rx="12" fill="#2a2136" stroke="#ffd25e" stroke-width="3"/>
+          <rect x="44" y="74" width="12" height="5" rx="2.5" fill="#ff5c8a"/>
+          <circle cx="50" cy="36" r="28" fill="url(#mHead)"/>
+          <circle cx="50" cy="36" r="28" fill="url(#mMesh)"/>
+          <ellipse cx="41" cy="22" rx="8" ry="4" fill="rgba(255,255,255,.45)" transform="rotate(-25 41 22)"/>
+          <g class="m-face">
+            <ellipse class="m-eye" cx="40" cy="36" rx="4.2" ry="5.4" fill="#1a0710"/>
+            <ellipse class="m-eye" cx="60" cy="36" rx="4.2" ry="5.4" fill="#1a0710"/>
+            <circle cx="41.4" cy="34" r="1.4" fill="#fff"/><circle cx="61.4" cy="34" r="1.4" fill="#fff"/>
+            <circle cx="33" cy="45" r="4" fill="rgba(255,92,138,.55)"/><circle cx="67" cy="45" r="4" fill="rgba(255,92,138,.55)"/>
+            <path class="m-mouth" d="M41 46 Q50 55 59 46" stroke="#1a0710" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <div id="crowd"></div>
   </div>
 
   <div class="controls">
@@ -370,6 +480,7 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
   </div>
 
   <div id="resOv" hidden></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
 
   <aside id="drawer" hidden>
     <div class="dr-head"><h3>Versão sem voz</h3><button class="icon" id="closeDrawer" aria-label="Fechar">✕</button></div>
@@ -385,21 +496,64 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
   <div class="actions">
     <button class="btn primary" id="saveCfg">Salvar</button>
     <button class="btn" id="logoutBtn">Desconectar</button>
-    <button class="btn" id="clearLrc">Apagar letras coladas</button>
+    <button class="btn" id="openLib">📚 Minha biblioteca</button>
+    <button class="btn" id="openTv">📺 Conectar à TV</button>
+    <button class="btn" id="tvModeBtn">Usar esta tela como TV</button>
     <button class="btn" id="closeCfg">Fechar</button>
   </div>
 </dialog>
 
 <dialog id="lrcDlg">
-  <h3>Usar minha própria letra</h3>
-  <p style="color:var(--muted);margin:0;line-height:1.5;font-size:14.5px">Cole a letra no formato LRC (uma linha por verso, com tempo no início, ex.: <code>[00:12.50] primeira frase</code>). Texto sem tempos também funciona, com rolagem automática. Fica salvo só neste navegador, para esta música.</p>
+  <h3>Letra desta música</h3>
+  <h4 style="margin-top:4px">🔎 Buscar no banco de letras</h4>
+  <p class="sub2">Escreva o nome do jeito que quiser (pode ser só um pedaço) e escolha o resultado certo.</p>
+  <form id="lyrSearch" class="copyrow"><input class="field" id="lyrQ" autocomplete="off" style="margin:0" placeholder="nome da música e artista"><button class="btn small primary">Buscar</button></form>
+  <div id="lyrRes" class="lyrres"></div>
+  <h4>✍️ Colar uma letra</h4>
+  <p class="sub2">Formato LRC (ex.: <code>[00:12.50] primeira frase</code>) ou texto simples. Com texto simples, depois use “⏱ Sincronizar letra”.</p>
   <textarea id="lrcText" spellcheck="false" placeholder="[00:12.50] primeira frase&#10;[00:16.20] segunda frase"></textarea>
   <div class="actions">
-    <button class="btn primary" id="lrcSave">Usar esta letra</button>
+    <button class="btn primary" id="lrcSave">Usar a letra colada</button>
     <button class="btn" id="lrcRemove">Voltar à letra automática</button>
-    <button class="btn" id="lrcClose">Cancelar</button>
+    <button class="btn" id="lrcClose">Fechar</button>
   </div>
 </dialog>
+
+<dialog id="libDlg">
+  <h3>📚 Minha biblioteca</h3>
+  <p class="sub2">Letras que vocês escolheram, colaram ou sincronizaram no toque, mais os ajustes de sincronia. Exporte para levar a outro aparelho ou passar para os amigos. Ao importar, nada é apagado: as letras são somadas.</p>
+  <div class="actions" style="margin-top:8px">
+    <button class="btn primary" id="libExport">⬇️ Exportar arquivo</button>
+    <button class="btn" id="libShare" hidden>📤 Compartilhar</button>
+    <label class="btn" style="margin:0;color:inherit;font-size:inherit">⬆️ Importar arquivo<input type="file" id="libImport" accept=".json,application/json" hidden></label>
+  </div>
+  <ul class="hist" id="libList" style="margin-top:14px"></ul>
+  <div class="actions"><button class="btn" id="libClear">Apagar biblioteca</button><button class="btn primary" id="libClose">Fechar</button></div>
+</dialog>
+
+<dialog id="tvDlg">
+  <h3>📺 Conectar à TV</h3>
+  <ol class="steps" style="margin-top:10px">
+    <li><div>Na TV, abra o navegador <b>Internet</b> e acesse:<div class="copyrow"><code id="tvUrl"></code></div><span class="sub2">Dica: salve nos favoritos da TV para as próximas vezes.</span></div></li>
+    <li><div>A TV vai mostrar um <b>código de 6 letras</b>. Digite aqui:
+      <form id="tvForm" class="copyrow"><input class="field" id="tvCodeIn" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="ex.: K7P4QX" style="margin:0;text-transform:uppercase;letter-spacing:.15em;font-weight:700"><button class="btn small primary">Conectar</button></form></div></li>
+    <li><div>O celular faz o login do Spotify na TV por você (sem digitar senha no controle remoto).</div></li>
+  </ol>
+  <div id="tvStatus" class="warn" hidden></div>
+  <p class="sub2" style="margin-top:14px">Para tocar o som na TV, escolha a TV como aparelho no palco (ela aparece se o app do Spotify da TV estiver aberto). O celular fica sendo o microfone e o controle.</p>
+  <div class="actions"><button class="btn" id="tvUnlink" hidden>Desconectar TV</button><button class="btn" id="tvTest" hidden>Testar</button><button class="btn primary" id="tvClose">Fechar</button></div>
+</dialog>
+
+<div id="tvIdle" hidden>
+  <div class="tv-wrap">
+    <div class="brand" style="font-size:44px;justify-content:center"><span class="mark" style="width:64px;height:64px;border-radius:18px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" style="width:36px;height:36px"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg></span>Karaokê</div>
+    <h1 id="tvMsg">Escolha a música no celular 🎤</h1>
+    <p id="tvSub" class="tvsub"></p>
+    <div class="tvcode" id="tvCodeBox"><span>Código desta TV</span><b id="tvCode">------</b><small>No celular: 🏆 Festa → 📺 Conectar à TV</small></div>
+    <div id="tvLast"></div>
+    <div class="actions" style="justify-content:center;margin-top:30px"><button class="btn" id="tvLoginHere">Entrar no Spotify direto nesta TV</button><button class="btn" id="tvExit">Sair do modo TV</button></div>
+  </div>
+</div>
 
 <dialog id="partyDlg">
   <h3>🏆 Modo festa</h3>
@@ -408,6 +562,9 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
   <div class="chips" id="pList"></div>
   <label class="switch"><input type="checkbox" id="scoreOn"> Pontuar as músicas (usa o microfone)</label>
   <p class="sub2" style="margin-top:10px">Dica: deixe a música tocando numa caixa de som ou TV e segure o celular perto da boca de quem canta.</p>
+  <label class="switch" style="justify-content:space-between">Animações no palco
+    <select class="sel" id="fxSel" style="max-width:170px;background-color:var(--panel2)"><option value="full">Completas</option><option value="lite">Leves</option><option value="off">Desligadas</option></select></label>
+  <div class="actions" style="margin-top:12px"><button class="btn" id="partyTv">📺 Conectar à TV</button><button class="btn" id="partyLib">📚 Minha biblioteca</button></div>
   <h4>Ranking</h4>
   <div id="rankBox"></div>
   <div class="actions"><button class="btn" id="clearRank">Zerar ranking</button><button class="btn primary" id="closeParty">Fechar</button></div>
@@ -528,11 +685,11 @@ const Auth = {
   set clientId(v) { LS.set('kk.clientId', String(v || '').trim()); },
   get tok() { return LS.get('kk.token'); },
   get loggedIn() { return !!(this.tok && this.clientId); },
-  async authUrl() {
+  async authUrl(extra = {}) {
     if (!this.clientId) { toast('Cole o Client ID do seu app do Spotify primeiro.', 'err'); return null; }
     if (!window.isSecureContext) { toast('Abra o app por https:// ou http://127.0.0.1 (veja o README).', 'err'); return null; }
     const verifier = randomString(64), state = randomString(16);
-    LS.set('kk.pkce', { verifier, state });
+    LS.set('kk.pkce', { verifier, state, ...extra });
     const p = new URLSearchParams({
       client_id: this.clientId, response_type: 'code', redirect_uri: REDIRECT, scope: SCOPES,
       code_challenge_method: 'S256', code_challenge: await sha256url(verifier), state
@@ -557,19 +714,29 @@ const Auth = {
     if (err) { toast('Login não concluído: ' + err, 'err'); return; }
     const pk = LS.get('kk.pkce'); LS.del('kk.pkce');
     if (!pk || pk.state !== u.searchParams.get('state')) { toast('Falha de verificação no login. Tente de novo.', 'err'); return; }
+    if (pk.tv) {
+      // login feito no celular, mas para a TV: os tokens vão criptografados para a TV e não ficam aqui
+      try {
+        const tok = await this.tokenRequest({ grant_type: 'authorization_code', code, redirect_uri: REDIRECT, client_id: this.clientId, code_verifier: pk.verifier }, false);
+        await TVLink.send({ t: 'pair', clientId: this.clientId, tok }, pk.tv);
+        LS.set('kk.tv.link', pk.tv);
+        toast('TV conectada! Em alguns segundos ela entra no Spotify.');
+      } catch (e) { toast('Não consegui conectar a TV: ' + e.message, 'err'); }
+      return;
+    }
     try {
       await this.tokenRequest({ grant_type: 'authorization_code', code, redirect_uri: REDIRECT, client_id: this.clientId, code_verifier: pk.verifier });
       toast('Conectado ao Spotify!');
     } catch (e) { toast('Erro ao conectar: ' + e.message, 'err'); }
   },
-  async tokenRequest(body) {
+  async tokenRequest(body, store = true) {
     const r = await fetch('https://accounts.spotify.com/api/token', {
       method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(body)
     });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) throw new Error(j.error_description || j.error || ('HTTP ' + r.status));
-    const tok = { access: j.access_token, refresh: j.refresh_token || this.tok?.refresh, exp: Date.now() + (j.expires_in - 60) * 1000 };
-    LS.set('kk.token', tok);
+    const tok = { access: j.access_token, refresh: j.refresh_token || (store ? this.tok?.refresh : undefined), exp: Date.now() + (j.expires_in - 60) * 1000 };
+    if (store) LS.set('kk.token', tok);
     return tok;
   },
   async token() {
@@ -821,7 +988,11 @@ function renderResults() {
 const St = { open: false, track: null, playTrack: null, lines: [], plain: '', els: [], idx: -2, offset: 0, source: '', cd: -1, wake: null };
 const offKey = () => St.track && St.playTrack ? `${St.track.id}|${St.playTrack.uri}` : '';
 function loadOffset() { St.offset = (LS.get('kk.offsets', {})[offKey()]) || 0; renderOffset(); }
-function saveOffset() { const m = LS.get('kk.offsets', {}); if (St.offset) m[offKey()] = St.offset; else delete m[offKey()]; LS.set('kk.offsets', m); renderOffset(); }
+let offTvTimer;
+function saveOffset() {
+  const m = LS.get('kk.offsets', {}); if (St.offset) m[offKey()] = St.offset; else delete m[offKey()]; LS.set('kk.offsets', m); renderOffset();
+  clearTimeout(offTvTimer); offTvTimer = setTimeout(() => TVLink.send({ t: 'off', key: offKey(), offset: St.offset }), 1500);
+}
 function renderOffset() { $('#offLbl').textContent = 'Sinc. ' + (St.offset > 0 ? '+' : '') + (St.offset / 1000).toFixed(2).replace('.', ',') + 's'; }
 
 function openStage(track, { autoplay = true, replace = false } = {}) {
@@ -836,14 +1007,16 @@ function openStage(track, { autoplay = true, replace = false } = {}) {
   $('#stage').hidden = false; $('#mini').hidden = true; document.body.classList.add('staged');
   $('#drawer').hidden = true;
   $('#versBtn').hidden = $('#device').hidden = !!track.demo;
-  if (!wasOpen && !replace) history.pushState({ stage: 1 }, '');
+  if (!wasOpen && !replace && !TV.on) history.pushState({ stage: 1 }, '');
   $('#lyrics').innerHTML = ''; $('#lyrics').style.transform = '';
   setMsg('<div class="spinner"></div><p>Procurando a letra sincronizada…</p>');
-  if (!track.demo) refreshDevices();
+  if (!track.demo && !TV.on) refreshDevices();
   if (autoplay) Player.play(track).catch(apiError);
   else { Player.currentUri = track.uri; Player.duration = track.durationMs; }
   loadLyrics(track);
+  FX.reset();
   requestWake();
+  sendTrackToTv();
 }
 function closeStage(fromPop = false) {
   if (!St.open) return;
@@ -873,10 +1046,16 @@ function setMsg(html) { const m = $('#lyricsMsg'); if (!html) { m.hidden = true;
 async function loadLyrics(track) {
   const id = track.id;
   let res = null;
-  const custom = LS.get('kk.lrc.' + id);
+  const e = Lib.get(id);
   if (track.demo) res = { synced: DEMO_LRC, source: 'Modo demonstração · áudio sintetizado no navegador' };
-  else if (custom) res = { synced: custom, plain: custom, source: 'Letra colada por você' };
-  else { try { res = await fetchLyrics(track); } catch { res = null; } }
+  else if (e?.lrc) res = { synced: e.lrc, plain: e.lrc, source: e.source === 'toque' ? 'Letra sincronizada por vocês' : 'Letra da sua biblioteca' };
+  else if (e?.lrclibId) {
+    try {
+      const r = await fetch('https://lrclib.net/api/get/' + encodeURIComponent(e.lrclibId));
+      if (r.ok) { const j = await r.json(); res = { synced: j.syncedLyrics || '', plain: j.plainLyrics || '', source: 'Letras: LRCLIB (escolhida por vocês)' }; }
+    } catch {}
+  }
+  if (!res && !track.demo) { try { res = await fetchLyrics(track); } catch { res = null; } }
   if (!St.open || St.track?.id !== id) return;
   applyLyrics(res);
 }
@@ -887,11 +1066,13 @@ function applyLyrics(res) {
   if (res?.synced) St.lines = parseLRC(res.synced);
   if (!St.lines.length && res?.plain) St.plain = res.plain.replace(/\[[^\]]*\]/g, '').trim();
   buildLyricsDOM();
+  FX.setBeat(St.lines); FX.reset();
   $('#tapSyncBtn').hidden = !(!St.lines.length && St.plain);
   if (St.lines.length) setMsg('');
-  else if (St.plain) { setMsg(''); toast('Essa letra veio sem os tempos. Toque em “⏱ Sincronizar letra” para marcar o ritmo uma vez, e ela fica salva.'); }
+  else if (St.plain) { setMsg(''); if (!TV.on) toast('Essa letra veio sem os tempos. Toque em “⏱ Sincronizar letra” para marcar o ritmo uma vez, e ela fica salva.'); }
   else if (res?.instrumental) setMsg('<h3>Faixa instrumental</h3><p>Essa música não tem letra.</p>');
-  else setMsg('<h3>Letra não encontrada</h3><p>Não achei letra sincronizada para essa faixa. Você pode colar uma letra sua (formato LRC) ou tentar outra versão da música na busca.</p><button class="btn primary" data-act="lrc">Colar letra</button>');
+  else if (TV.on) setMsg('<h3>Letra não encontrada</h3><p>Busque ou cole a letra pelo celular, no botão “Letra…”.</p>');
+  else setMsg('<h3>Letra não encontrada</h3><p>Não achei automaticamente. Busque com outro nome no banco de letras ou cole uma letra sua.</p><button class="btn primary" data-act="lrc">Buscar ou colar letra</button>');
 }
 function buildLyricsDOM() {
   const box = $('#lyrics');
@@ -922,6 +1103,7 @@ function setActive(i) {
   if (St.idx >= 0 && els[St.idx]) { els[St.idx].classList.remove('active'); els[St.idx].firstChild.style.setProperty('--p', '0%'); }
   els.forEach((el, k) => el.classList.toggle('past', k < i));
   if (i >= 0 && els[i]) els[i].classList.add('active');
+  if (i > St.idx && i >= 0) FX.onLineStart(i);
   St.idx = i;
   centerOn(Math.max(0, i));
 }
@@ -969,18 +1151,21 @@ function frame() {
       const v = dur ? clamp((pos - 8000) / (dur - 20000), 0, 1) : 0;
       box.style.transform = `translateY(${wh * 0.3 - v * (h - wh * 0.8)}px)`;
     }
+    $('#stage').classList.toggle('paused', !Player.playing);
+    FX.draw(pos);
   }
   requestAnimationFrame(frame);
 }
 
 function followTrack(item) {
-  if (!item || !St.open || St.track?.demo || TS.on || !$('#resOv').hidden || performance.now() - Player.lastCmd < 6000) return;
+  if (!item || !St.open || St.track?.demo || TS.on || (!TV.on && !$('#resOv').hidden) || performance.now() - Player.lastCmd < 6000) return;
   if (sameTrack(item, St.playTrack) || sameTrack(item, St.track)) return;
   if (Score.active) {
     // a música acabou e o Spotify emendou outra: fecha a nota em vez de trocar
     if (Score.maxPos > (St.playTrack?.durationMs || Infinity) * 0.85) { Score.finish(); return; }
     Score.cancel();
   }
+  if (TV.on) { TV.show(item); return; }
   openStage(T(item), { autoplay: false, replace: true });
 }
 setInterval(async () => {
@@ -1193,6 +1378,8 @@ const Score = {
     $('#scorebar').hidden = false; $('#finishBtn').hidden = false;
     $('#liveScore').textContent = '0'; $('#comboLbl').textContent = 'pontos'; $('#noteLbl').textContent = '–';
     clearInterval(this.timer); this.timer = setInterval(() => this.tick(), 50);
+    this.lastTv = 0;
+    TVLink.send({ t: 'sing', name: player.name, color: player.color, uri: St.playTrack?.uri });
     requestAnimationFrame(() => St.open && St.lines.length && centerOn(Math.max(0, St.idx), true));
   },
   cancel() {
@@ -1243,10 +1430,15 @@ const Score = {
     this.lineScores[i] = sc;
     if (sc >= 0.7) { this.combo++; this.bestCombo = Math.max(this.bestCombo, this.combo); } else this.combo = 0;
     const lv = sc >= 0.85 ? ['Perfeito!', 'perfect'] : sc >= 0.7 ? ['Ótimo!', 'great'] : sc >= 0.5 ? ['Bom!', 'good'] : sc >= 0.25 ? ['Quase…', 'meh'] : ['Ops…', 'miss'];
-    showFeedback(lv[0] + (this.combo >= 3 ? `  ×${this.combo}` : ''), lv[1]);
-    const v = Object.values(this.lineScores);
-    $('#liveScore').textContent = Math.round(100 * avg(v));
+    const txt = lv[0] + (this.combo >= 3 ? `  ×${this.combo}` : '');
+    showFeedback(txt, lv[1]);
+    FX.onFeedback(lv[1], this.combo);
+    const live = Math.round(100 * avg(Object.values(this.lineScores)));
+    $('#liveScore').textContent = live;
     $('#comboLbl').textContent = this.combo >= 2 ? `combo ×${this.combo}` : 'pontos';
+    // para a TV: no máximo 1 mensagem a cada 12 s (limite do canal gratuito)
+    const now = Date.now();
+    if (!this.lastTv || now - this.lastTv > 12000) { this.lastTv = now; TVLink.send({ t: 'fb', txt, lvl: lv[1], live, combo: this.combo }); }
   },
   draw(pos) {
     const c = $('#trail'), w = c.clientWidth, h = c.clientHeight; if (!w) return;
@@ -1291,15 +1483,26 @@ const Score = {
     const p = this.player;
     const entry = { pid: p.id, name: p.name, song: cleanTitle(St.track.name), artist: St.track.artists[0] || '', score, bonus: 0, total: score, combo: this.bestCombo, date: Date.now() };
     Party.record(entry);
-    showResults(entry, { presence, tune, key, expr }, silent);
+    const parts = { presence, tune, key, expr };
+    showResults(entry, parts, silent);
+    TVLink.send({ t: 'result', entry, parts, silent });
   }
 };
 
+const stars = n => '★'.repeat(n) + `<span class="off">${'★'.repeat(5 - n)}</span>`;
+const starN = s => s >= 90 ? 5 : s >= 75 ? 4 : s >= 60 ? 3 : s >= 40 ? 2 : 1;
+const title = s => s >= 90 ? 'Estrela do palco!' : s >= 75 ? 'Arrasou!' : s >= 60 ? 'Mandou bem!' : s >= 40 ? 'Tá esquentando!' : 'Bora de novo!';
+function applyApplause(score, bonus, total) {
+  $('#clapMeter') && ($('#clapMeter').style.width = bonus * 10 + '%');
+  $('#clapRes').innerHTML = bonus ? `<b style="color:var(--gold)">+${bonus} pontos de aplauso!</b> Nota final: <b>${total}</b>` : 'A plateia tava tímida… sem bônus dessa vez.';
+  if (bonus) {
+    countUp($('#bigScore'), score, total, 900);
+    $('#starsBox').innerHTML = stars(starN(total)); $('#rTitle').textContent = title(total);
+    FX.confetti(60 + bonus * 12);
+  }
+}
 function showResults(e, parts, silent) {
-  const nx = Party.next();
-  const stars = n => '★'.repeat(n) + `<span class="off">${'★'.repeat(5 - n)}</span>`;
-  const starN = s => s >= 90 ? 5 : s >= 75 ? 4 : s >= 60 ? 3 : s >= 40 ? 2 : 1;
-  const title = s => s >= 90 ? 'Estrela do palco!' : s >= 75 ? 'Arrasou!' : s >= 60 ? 'Mandou bem!' : s >= 40 ? 'Tá esquentando!' : 'Bora de novo!';
+  const nx = TV.on ? null : Party.next();
   const bar = (lbl, v) => `<div class="bar"><span>${lbl}</span><div class="tr"><i data-w="${Math.round(v * 100)}"></i></div><span class="v">${Math.round(v * 100)}</span></div>`;
   const ov = $('#resOv');
   ov.innerHTML = `<div class="resbox">
@@ -1314,7 +1517,7 @@ function showResults(e, parts, silent) {
     ${e.combo >= 3 ? `<p class="sub2">Maior sequência: <b style="color:var(--gold)">${e.combo} frases seguidas</b> acima de “Ótimo”.</p>` : ''}
     <div class="applause">
       <b>👏 Aplauso da plateia</b>
-      <div class="sub2">Toque no botão e peça pra galera aplaudir e gritar por 5 segundos. Vale até +10 pontos.</div>
+      <div class="sub2">${TV.on ? 'Meçam o aplauso pelo celular: aplaudam e gritem por 5 segundos! Vale até +10 pontos.' : 'Toque no botão e peça pra galera aplaudir e gritar por 5 segundos. Vale até +10 pontos.'}</div>
       <button class="btn primary" id="clapBtn">Medir aplauso</button>
       <div class="meter"><i id="clapMeter"></i></div>
       <div class="sub2" id="clapRes"></div>
@@ -1326,11 +1529,14 @@ function showResults(e, parts, silent) {
   </div>`;
   ov.hidden = false;
   countUp($('#bigScore'), 0, e.score, 1300);
+  setTimeout(() => FX.confetti(e.score >= 90 ? 220 : e.score >= 75 ? 140 : e.score >= 60 ? 80 : 30), 900);
   requestAnimationFrame(() => setTimeout(() => ov.querySelectorAll('.tr i').forEach(i => { i.style.width = i.dataset.w + '%'; }), 60));
-  $('#clapBtn').onclick = () => measureApplause(e, starN, stars, title);
+  if (TV.on) return;
+  $('#clapBtn').onclick = () => measureApplause(e);
   $('#resRank').onclick = () => { renderParty(); $('#partyDlg').showModal(); };
   $('#resNext').onclick = () => {
     const n = Party.next();
+    TVLink.send({ t: 'close', next: n?.name || '' });
     closeStage();
     $('#q').value = ''; $('#q').focus();
     if (n) toast(`Vez de ${n.name}! Escolha a música na busca.`);
@@ -1341,7 +1547,7 @@ function countUp(el, from, to, ms) {
   const step = now => { const k = clamp((now - t0) / ms, 0, 1); el.textContent = Math.round(from + (to - from) * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(step); };
   requestAnimationFrame(step);
 }
-async function measureApplause(e, starN, stars, title) {
+async function measureApplause(e) {
   const btn = $('#clapBtn'); btn.disabled = true;
   try { await Mic.start(); } catch { toast('Sem acesso ao microfone.', 'err'); btn.disabled = false; return; }
   // 1 s de referência do ambiente, depois 5 s de aplauso
@@ -1365,13 +1571,9 @@ async function measureApplause(e, starN, stars, title) {
   const bonus = Math.round(clamp((sum / Math.max(1, n) - 4) / 18, 0, 1) * 10);
   const total = Math.min(100, e.score + bonus);
   Party.updateLast({ bonus, total });
-  $('#clapMeter').style.width = bonus * 10 + '%';
   btn.textContent = 'Medido!';
-  $('#clapRes').innerHTML = bonus ? `<b style="color:var(--gold)">+${bonus} pontos de aplauso!</b> Nota final: <b>${total}</b>` : 'A plateia tava tímida… sem bônus dessa vez.';
-  if (bonus) {
-    countUp($('#bigScore'), e.score, total, 900);
-    $('#starsBox').innerHTML = stars(starN(total)); $('#rTitle').textContent = title(total);
-  }
+  applyApplause(e.score, bonus, total);
+  TVLink.send({ t: 'clap', score: e.score, bonus, total });
 }
 
 /* ---------- sincronizar letra no toque ---------- */
@@ -1411,11 +1613,405 @@ function finishTapSync() {
   const out = TS.lines.slice(0, n).map((l, i) => lrcTime(TS.times[i]) + ' ' + l);
   out.push(lrcTime(TS.times[n - 1] + 6000) + ' ');
   const lrc = out.join('\n');
-  LS.set('kk.lrc.' + St.track.id, lrc);
+  saveToLib({ lrc, source: 'toque' });
   applyLyrics({ synced: lrc, plain: St.plain, source: 'Letra sincronizada por você' });
   Player.seek(0);
   toast('Letra sincronizada e salva! Da próxima vez ela já vem pronta.');
 }
+
+/* ---------- biblioteca própria ---------- */
+const Lib = {
+  get all() { return LS.get('kk.lib', {}) || {}; },
+  get(id) { return this.all[id] || null; },
+  put(id, patch) { const a = this.all; a[id] = { ...(a[id] || {}), ...patch, updated: Date.now() }; LS.set('kk.lib', a); },
+  del(id) { const a = this.all; delete a[id]; LS.set('kk.lib', a); },
+  migrate() {
+    Object.keys(localStorage).filter(k => k.startsWith('kk.lrc.')).forEach(k => {
+      const id = k.slice(7), lrc = LS.get(k);
+      if (lrc && !this.get(id)) this.put(id, { lrc, name: '', artist: '', source: 'colada' });
+      localStorage.removeItem(k);
+    });
+  },
+  exportData() { return { app: 'karaoke-spotify', version: 1, exported: new Date().toISOString(), tracks: this.all, offsets: LS.get('kk.offsets', {}) }; },
+  importData(d) {
+    if (!d || typeof d !== 'object' || !d.tracks) throw new Error('arquivo não é uma biblioteca do Karaokê');
+    const a = this.all; let n = 0;
+    for (const [id, e] of Object.entries(d.tracks)) {
+      if (!e || typeof e !== 'object') continue;
+      if (!a[id] || (e.updated || 0) > (a[id].updated || 0)) { a[id] = { name: String(e.name || ''), artist: String(e.artist || ''), source: String(e.source || 'importada'), lrc: e.lrc ? String(e.lrc) : undefined, lrclibId: e.lrclibId || undefined, updated: e.updated || Date.now() }; n++; }
+    }
+    LS.set('kk.lib', a);
+    const offs = LS.get('kk.offsets', {});
+    for (const [k, v] of Object.entries(d.offsets || {})) if (typeof v === 'number' && !(k in offs)) offs[k] = v;
+    LS.set('kk.offsets', offs);
+    return n;
+  }
+};
+function saveToLib(patch) {
+  const t = St.track; if (!t || t.demo) return;
+  Lib.put(t.id, { name: cleanTitle(t.name), artist: t.artists[0] || '', durationMs: t.durationMs, lrc: null, lrclibId: null, ...patch });
+  sendTrackToTv(true);
+}
+function renderLib() {
+  const a = Lib.all, ids = Object.keys(a).sort((x, y) => (a[y].updated || 0) - (a[x].updated || 0));
+  const src = { colada: 'colada', toque: 'sincronizada no toque', lrclib: 'escolhida no banco', importada: 'importada' };
+  $('#libList').innerHTML = ids.length
+    ? ids.map(id => `<li><span><b>${esc(a[id].name || 'Música sem nome')}</b>${a[id].artist ? ' · ' + esc(a[id].artist) : ''} <small>(${esc(src[a[id].source] || a[id].source || '')})</small></span><button class="rm" data-del="${esc(id)}" aria-label="Remover">🗑</button></li>`).join('')
+    : '<li>Ainda vazia. Quando vocês escolherem, colarem ou sincronizarem uma letra, ela aparece aqui.</li>';
+  $('#libShare').hidden = !(navigator.canShare && navigator.canShare({ files: [new File(['{}'], 'a.json', { type: 'application/json' })] }));
+}
+function libFile() {
+  const d = new Date().toISOString().slice(0, 10);
+  return new File([JSON.stringify(Lib.exportData(), null, 1)], `karaoke-biblioteca-${d}.json`, { type: 'application/json' });
+}
+
+/* ---------- busca manual de letra (LRCLIB) ---------- */
+async function searchLyrics(q) {
+  const box = $('#lyrRes');
+  q = q.trim(); if (!q) return;
+  box.innerHTML = '<div class="spinner" style="margin:14px auto"></div>';
+  try {
+    const r = await fetch('https://lrclib.net/api/search?' + new URLSearchParams({ q }));
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const list = (await r.json()).filter(x => x && (x.syncedLyrics || x.plainLyrics)).slice(0, 20);
+    St.lyrResults = list;
+    const dur = Math.round((St.track?.durationMs || 0) / 1000);
+    box.innerHTML = list.length ? list.map((x, i) => {
+      const diff = dur ? Math.round(x.duration - dur) : 0;
+      return `<button class="lyr" data-li="${i}"><div style="min-width:0"><div class="t">${esc(x.trackName)}</div><div class="a">${esc(x.artistName)}${x.albumName ? ' · ' + esc(x.albumName) : ''} · ${fmt(x.duration * 1000)}${dur ? ` (${Math.abs(diff) <= 2 ? 'mesma duração' : (diff > 0 ? '+' : '') + diff + 's'})` : ''}</div></div>
+        <span class="badge${x.syncedLyrics ? '' : ' plain'}">${x.syncedLyrics ? 'sincronizada' : 'só texto'}</span></button>`;
+    }).join('') : '<p class="sub2">Nada encontrado. Tente só o nome da música, ou nome + artista sem acentos.</p>';
+  } catch (e) { box.innerHTML = '<p class="sub2">Não consegui buscar agora. Tente de novo em alguns segundos.</p>'; }
+}
+function chooseLyrics(x) {
+  saveToLib({ lrclibId: x.id, source: 'lrclib' });
+  applyLyrics({ synced: x.syncedLyrics || '', plain: x.plainLyrics || '', source: 'Letras: LRCLIB (escolhida por vocês)' });
+  $('#lrcDlg').close();
+  toast('Letra escolhida e salva na sua biblioteca.');
+}
+
+/* ---------- animações de festa ---------- */
+const FX = {
+  mode: LS.get('kk.fx', 'full'), parts: [], hits: {}, lastLt: 0, poseTimer: null, last: 0,
+  apply() { $('#stage').dataset.fx = this.mode; this.buildCrowd(); },
+  setMode(m) { this.mode = m; LS.set('kk.fx', m); this.apply(); },
+  reset() { this.hits = {}; this.parts = []; $('#stage').classList.remove('onfire'); $('#crowd').classList.remove('cheer', 'lights'); },
+  buildCrowd() {
+    const n = clamp(Math.round(window.innerWidth / 58), 6, 26), cols = ['#2b2140', '#33264a', '#271d38', '#3a2a52'];
+    let h = '';
+    for (let i = 0; i < n; i++) {
+      const c = cols[i % cols.length], d = (Math.random() * 0.6).toFixed(2), s = 0.85 + Math.random() * 0.3, lc = ['#fff', '#ffd25e', '#8fd3ff'][i % 3];
+      h += `<div class="fan" style="--d:-${d}s;transform:scale(${s.toFixed(2)})"><svg viewBox="0 0 40 52">
+        <circle class="light" cx="${i % 2 ? 33 : 7}" cy="4" r="3" fill="${lc}"/>
+        <g class="arms" stroke="${c}" stroke-width="5" stroke-linecap="round"><path d="M10 34 L5 12"/><path d="M30 34 L35 12"/></g>
+        <circle cx="20" cy="20" r="9" fill="${c}"/><path d="M4 52 Q4 32 20 31 Q36 32 36 52 Z" fill="${c}"/></svg></div>`;
+    }
+    $('#crowd').innerHTML = h;
+  },
+  setBeat(lines) {
+    const d = [];
+    for (let i = 1; i < lines.length; i++) { const g = lines[i].t - lines[i - 1].t; if (lines[i - 1].text && g > 800 && g < 9000) d.push(g); }
+    d.sort((a, b) => a - b);
+    let beat = d.length ? d[d.length >> 1] / 4 : 600;
+    while (beat < 330) beat *= 2; while (beat > 820) beat /= 2;
+    $('#stage').style.setProperty('--beat', (beat / 1000).toFixed(3) + 's');
+  },
+  pose(cls, ms) {
+    const m = $('#mascot'); m.classList.remove('jump', 'hype', 'sad'); void m.offsetWidth; m.classList.add(cls);
+    clearTimeout(this.poseTimer); this.poseTimer = setTimeout(() => m.classList.remove(cls), ms);
+  },
+  onLineStart(i) {
+    if (this.mode === 'off' || !St.lines[i]?.text) return;
+    const bg = $('#stageBg');
+    bg.animate?.([{ transform: 'scale(1.14)' }, { transform: 'scale(1.1)' }], { duration: 450, easing: 'ease-out' });
+  },
+  onFeedback(lvl, combo) {
+    if (this.mode === 'off') return;
+    const st = $('#stage'), crowd = $('#crowd');
+    const fb = $('#fb').getBoundingClientRect(), s = st.getBoundingClientRect();
+    const x = fb.left - s.left + fb.width / 2 || s.width / 2, y = fb.top - s.top + fb.height / 2 || s.height * 0.2;
+    if (lvl === 'perfect') { this.burst(x, y, this.mode === 'full' ? 46 : 24, ['#ffd25e', '#fff', '#ff5c8a'], 1.2); this.pose('jump', 760); }
+    else if (lvl === 'great') { this.burst(x, y, this.mode === 'full' ? 26 : 14, ['#7dffb0', '#fff', '#ffd25e'], 0.9); this.pose('hype', 1200); }
+    else if (lvl === 'good') this.burst(x, y, 10, ['#8fd3ff', '#fff'], 0.7);
+    else if (lvl === 'miss') this.pose('sad', 1000);
+    if (lvl === 'perfect' || lvl === 'great') { crowd.classList.add('cheer'); clearTimeout(this.cheerT); this.cheerT = setTimeout(() => crowd.classList.remove('cheer'), 1400); }
+    crowd.classList.toggle('lights', combo >= 8);
+    st.classList.toggle('onfire', combo >= 5 && this.mode === 'full');
+    if (combo >= 10 && combo % 5 === 0) this.confetti(90);
+  },
+  burst(x, y, n, colors, power = 1) {
+    for (let i = 0; i < n; i++) {
+      const a = Math.random() * Math.PI * 2, v = (2 + Math.random() * 5) * power;
+      this.parts.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2, g: 0.12, life: 1, decay: 0.012 + Math.random() * 0.02, size: 2 + Math.random() * 3.5, color: colors[i % colors.length], kind: 'spark' });
+    }
+    if (this.parts.length > 600) this.parts.splice(0, this.parts.length - 600);
+  },
+  confetti(n) {
+    if (this.mode === 'off') return;
+    const w = $('#stage').clientWidth, cols = ['#ff5c8a', '#ffd25e', '#7dffb0', '#8fd3ff', '#c79bff', '#fff'];
+    n = this.mode === 'lite' ? Math.round(n / 2) : n;
+    for (let i = 0; i < n; i++) this.parts.push({ x: Math.random() * w, y: -20 - Math.random() * 200, vx: (Math.random() - 0.5) * 2, vy: 2 + Math.random() * 3, g: 0.03, life: 1, decay: 0.004 + Math.random() * 0.004, size: 5 + Math.random() * 6, rot: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3, color: cols[i % cols.length], kind: 'conf' });
+  },
+  canvas(id) {
+    const c = $(id), w = c.clientWidth, h = c.clientHeight, dpr = Math.min(window.devicePixelRatio || 1, TV.on ? 1 : 2);
+    if (c.width !== Math.round(w * dpr) || c.height !== Math.round(h * dpr)) { c.width = Math.round(w * dpr); c.height = Math.round(h * dpr); }
+    const g = c.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+    return { g, w, h };
+  },
+  draw(pos) {
+    const now = performance.now(), dt = Math.min(3, (now - (this.last || now)) / 16.7); this.last = now;
+    this.drawHighway(pos);
+    // partículas
+    if (!this.parts.length && !this.fxDirty) return;
+    const { g } = this.canvas('#fx'); this.fxDirty = this.parts.length > 0;
+    for (const p of this.parts) {
+      p.vy += p.g * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.life -= p.decay * dt;
+      g.globalAlpha = clamp(p.life, 0, 1); g.fillStyle = p.color;
+      if (p.kind === 'conf') { p.rot += p.vr * dt; g.save(); g.translate(p.x, p.y); g.rotate(p.rot); g.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2); g.restore(); }
+      else { g.beginPath(); g.arc(p.x, p.y, p.size * (0.5 + p.life / 2), 0, 6.283); g.fill(); }
+    }
+    g.globalAlpha = 1;
+    this.parts = this.parts.filter(p => p.life > 0 && p.y < 4000);
+  },
+  drawHighway(pos) {
+    const { g, w, h } = this.canvas('#hwy');
+    if (this.mode !== 'full' || !St.lines.length || TS.on || !$('#resOv').hidden) return;
+    const r = $('#wrap').getBoundingClientRect(), s = $('#stage').getBoundingClientRect();
+    const top = r.top - s.top, bot = r.bottom - s.top + 10;
+    const hitY = bot - 8, horY = top + (bot - top) * 0.34, cx = w / 2;
+    const roadB = Math.min(w * 0.9, 1100), roadT = roadB * 0.1;
+    const widthAt = y => roadT + (roadB - roadT) * clamp((y - horY) / (hitY - horY), 0, 1);
+    const WIN = 3200, proj = d => horY + (hitY - horY) * Math.pow(1 - clamp(d, 0, 1), 2.1);
+    const lt = pos - St.offset;
+    if (lt < this.lastLt - 1500) this.hits = {};
+    this.lastLt = lt;
+    // pista
+    const grd = g.createLinearGradient(0, horY, 0, hitY);
+    grd.addColorStop(0, 'rgba(255,255,255,0)'); grd.addColorStop(1, 'rgba(255,255,255,.07)');
+    g.fillStyle = grd; g.beginPath();
+    g.moveTo(cx - roadT / 2, horY); g.lineTo(cx + roadT / 2, horY); g.lineTo(cx + roadB / 2, hitY); g.lineTo(cx - roadB / 2, hitY); g.closePath(); g.fill();
+    g.lineWidth = 1.2;
+    for (let k = 0; k <= 3; k++) {
+      const f = k / 3 - 0.5; g.strokeStyle = k === 0 || k === 3 ? 'rgba(255,92,138,.35)' : 'rgba(255,255,255,.09)';
+      g.beginPath(); g.moveTo(cx + f * roadT, horY); g.lineTo(cx + f * roadB, hitY); g.stroke();
+    }
+    const step = 400;
+    for (let k = 1; k <= 8; k++) {
+      const d = (k * step - (((lt % step) + step) % step)) / WIN, y = proj(d), ww = widthAt(y);
+      g.strokeStyle = `rgba(255,255,255,${0.07 * (1 - d)})`; g.beginPath(); g.moveTo(cx - ww / 2, y); g.lineTo(cx + ww / 2, y); g.stroke();
+    }
+    // notas (cada frase vira uma nota com "cauda" do tamanho da frase)
+    const laneCol = ['#ff5c8a', '#ffd25e', '#5ce1e6'];
+    const laneX = (lane, y) => cx + (lane - 1) * widthAt(y) / 3;
+    for (let i = Math.max(0, St.idx - 1); i < St.lines.length; i++) {
+      const L = St.lines[i]; if (!L.text) continue;
+      if (L.t - lt > WIN) break;
+      const N = St.lines[i + 1], end = Math.min(N ? N.t : L.t + 4000, L.t + Math.max(1600, L.text.length * 95));
+      if (end < lt) continue;
+      const lane = i % 3, d0 = (L.t - lt) / WIN, d1 = (end - lt) / WIN;
+      const y0 = proj(Math.max(d0, 0)), y1 = proj(Math.min(d1, 1));
+      const col = laneCol[lane];
+      // cauda
+      const tw0 = widthAt(y0) * 0.05, tw1 = widthAt(y1) * 0.05;
+      g.globalAlpha = 0.38; g.fillStyle = col; g.beginPath();
+      g.moveTo(laneX(lane, y1) - tw1, y1); g.lineTo(laneX(lane, y1) + tw1, y1); g.lineTo(laneX(lane, y0) + tw0, y0); g.lineTo(laneX(lane, y0) - tw0, y0); g.closePath(); g.fill();
+      g.globalAlpha = 1;
+      if (d0 >= 0) {
+        const gw = widthAt(y0) / 3 * 0.72, gh = Math.max(5, gw * 0.22), x = laneX(lane, y0);
+        g.fillStyle = col; g.beginPath(); g.roundRect ? g.roundRect(x - gw / 2, y0 - gh / 2, gw, gh, gh / 2) : g.rect(x - gw / 2, y0 - gh / 2, gw, gh); g.fill();
+        g.fillStyle = 'rgba(255,255,255,.55)'; g.fillRect(x - gw * 0.35, y0 - gh * 0.3, gw * 0.7, Math.max(1.5, gh * 0.18));
+      } else if (!this.hits[i]) {
+        this.hits[i] = 1;
+        const sx = laneX(lane, hitY), sr = $('#stage').getBoundingClientRect();
+        this.burst(sx, hitY, 16, [col, '#fff'], 0.8);
+        void sr;
+      }
+    }
+    // barra de acerto
+    g.fillStyle = 'rgba(255,210,94,.55)'; g.fillRect(cx - roadB / 2, hitY - 2, roadB, 4);
+    for (let l = 0; l < 3; l++) { g.strokeStyle = laneCol[l]; g.lineWidth = 2.5; g.beginPath(); g.ellipse(laneX(l, hitY), hitY, roadB / 3 * 0.3, 7, 0, 0, 6.283); g.stroke(); }
+  }
+};
+
+/* ---------- canal TV ⇄ celular (ntfy.sh, mensagens criptografadas) ---------- */
+const b64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const unb64 = s => { s = s.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '='; return Uint8Array.from(atob(s), c => c.charCodeAt(0)); };
+const CODE_ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+const Relay = {
+  base: LS.get('kk.relay', 'https://ntfy.sh/'),
+  cache: {},
+  async room(code) {
+    code = String(code).toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (this.cache[code]) return this.cache[code];
+    const enc = new TextEncoder();
+    const h = await crypto.subtle.digest('SHA-256', enc.encode('karaoke-room:' + code));
+    const topic = 'kk' + Array.from(new Uint8Array(h)).slice(0, 14).map(b => b.toString(16).padStart(2, '0')).join('');
+    const raw = await crypto.subtle.importKey('raw', enc.encode(code), 'PBKDF2', false, ['deriveKey']);
+    const key = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: enc.encode('karaoke-tv-v1'), iterations: 120000, hash: 'SHA-256' }, raw, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    return (this.cache[code] = { topic, key });
+  },
+  async publish(code, obj) {
+    const { topic, key } = await this.room(code);
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(JSON.stringify(obj)));
+    const body = b64(iv) + '.' + b64(ct);
+    const CH = 3200;
+    const parts = body.length <= CH ? [body] : Array.from({ length: Math.ceil(body.length / CH) }, (_, i) => body.slice(i * CH, (i + 1) * CH));
+    const id = randomString(6);
+    for (let i = 0; i < parts.length; i++) {
+      const msg = parts.length === 1 ? parts[0] : `C|${id}|${i}|${parts.length}|${parts[i]}`;
+      const r = await fetch(this.base + topic, { method: 'POST', body: msg });
+      if (!r.ok) throw new Error('canal da TV respondeu ' + r.status);
+    }
+  },
+  async subscribe(code, onMsg) {
+    const { topic, key } = await this.room(code);
+    const chunks = {};
+    const es = new EventSource(this.base + topic + '/sse');
+    es.onmessage = async ev => {
+      let m; try { m = JSON.parse(ev.data); } catch { return; }
+      if (m.event && m.event !== 'message') return;
+      let body = m.message; if (!body) return;
+      if (body.startsWith('C|')) {
+        const [, id, i, n, d] = body.split('|');
+        const c = chunks[id] ||= []; c[+i] = d;
+        if (c.filter(Boolean).length < +n) return;
+        body = c.join(''); delete chunks[id];
+      }
+      try {
+        const [a, b] = body.split('.');
+        const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(a) }, key, unb64(b));
+        onMsg(JSON.parse(new TextDecoder().decode(pt)));
+      } catch { /* mensagem de outra pessoa ou corrompida: ignora */ }
+    };
+    return es;
+  }
+};
+const TVLink = {
+  get code() { return LS.get('kk.tv.link', ''); },
+  async send(obj, code = this.code) {
+    if (!code || TV.on) return;
+    try { await Relay.publish(code, obj); } catch (e) { console.warn('TV', e); }
+  },
+  async pair(code) {
+    code = code.toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (code.length !== 6) { toast('O código tem 6 letras/números.', 'err'); return; }
+    if (!Auth.loggedIn) { toast('Conecte este celular ao Spotify primeiro.', 'err'); return; }
+    const u = await Auth.authUrl({ tv: code });
+    if (u) location.href = u;
+  }
+};
+function sendTrackToTv(withLyrics = false) {
+  if (!TVLink.code || TV.on || !St.track || St.track.demo) return;
+  const e = Lib.get(St.track.id);
+  const lib = e && (e.lrc || e.lrclibId) ? e : null;
+  TVLink.send({ t: 'track', track: St.track, playUri: St.playTrack?.uri, key: offKey(), offset: St.offset, lib: (withLyrics || lib) ? lib : null });
+}
+function renderTvDlg() {
+  $('#tvUrl').textContent = REDIRECT;
+  const c = TVLink.code;
+  $('#tvStatus').hidden = !c; $('#tvUnlink').hidden = !c; $('#tvTest').hidden = !c;
+  if (c) $('#tvStatus').innerHTML = `✅ Conectado à TV de código <b>${esc(c)}</b>. Notas, letras e resultados aparecem lá.`;
+}
+
+/* ---------- modo TV ---------- */
+const TV = {
+  on: false, hints: {}, es: null, loopT: null, lastResult: null,
+  detect() {
+    const pref = LS.get('kk.tvmode', null);
+    if (new URLSearchParams(location.search).has('tv')) return true;
+    if (pref !== null) return pref;
+    return /Tizen|SMART-TV|SmartTV|Web0S|WebOS|BRAVIA|AFT|CrKey/i.test(navigator.userAgent);
+  },
+  async start() {
+    this.on = true; document.body.classList.add('tv');
+    let code = LS.get('kk.tv.code', '');
+    if (!code) { code = Array.from(crypto.getRandomValues(new Uint8Array(6)), b => CODE_ABC[b % CODE_ABC.length]).join(''); LS.set('kk.tv.code', code); }
+    this.code = code;
+    $('#tvCode').textContent = code.slice(0, 3) + ' ' + code.slice(3);
+    this.idle();
+    try { this.es = await Relay.subscribe(code, m => this.onMsg(m)); } catch (e) { console.warn(e); }
+    clearInterval(this.loopT); this.loopT = setInterval(() => this.loop(), 2500);
+    this.loop();
+  },
+  stop() { LS.set('kk.tvmode', false); location.href = REDIRECT; },
+  idle() {
+    const logged = Auth.loggedIn;
+    $('#tvIdle').hidden = St.open;
+    $('#tvMsg').textContent = logged ? 'Escolha a música no celular 🎤' : 'Conecte esta TV pelo celular';
+    $('#tvSub').textContent = logged ? 'Quando começar a tocar no Spotify, a letra aparece aqui.' : 'No celular, abra o Karaokê e digite o código abaixo. O login no Spotify é feito pelo celular.';
+    $('#tvLoginHere').hidden = logged;
+    const r = this.lastResult;
+    $('#tvLast').innerHTML = r ? `Última apresentação: <b>${esc(r.name)}</b> · ${esc(r.song)} · <b style="color:var(--gold)">${r.total}</b> pontos${r.next ? `<br>Agora é a vez de <b>${esc(r.next)}</b>!` : ''}` : '';
+  },
+  async loop() {
+    if (!Auth.loggedIn || document.hidden) return;
+    if (St.open) return; // o palco já acompanha sozinho
+    try {
+      const j = await sp('/me/player');
+      if (j?.item && j.item.type === 'track' && (j.is_playing || j.progress_ms > 0)) this.show(j.item, j);
+    } catch (e) { if (e.status === 401) this.idle(); }
+  },
+  show(item, j) {
+    const h = this.hints[item.uri];
+    const track = h ? h.track : T(item);
+    Player.mode = 'remote';
+    if (j?.device?.id) Player.deviceId = j.device.id;
+    openStage(track, { autoplay: false, replace: true });
+    if (h && h.playUri && h.playUri !== track.uri) { St.playTrack = T(item); loadOffset(); renderStageHeader(); }
+    if (j) Player.sync(j.progress_ms || 0, !!j.is_playing, j.item.duration_ms);
+    $('#tvIdle').hidden = true;
+    if (this.singer && this.singer.uri === item.uri) this.showSinger(this.singer);
+  },
+  showSinger(s) {
+    $('#stSinger').textContent = '🎤 ' + s.name; $('#stSinger').hidden = false;
+    $('#scorebar').hidden = false; $('#scorebar').classList.add('remote');
+    $('#liveScore').textContent = '0'; $('#comboLbl').textContent = 'pontos';
+  },
+  onMsg(m) {
+    switch (m.t) {
+      case 'pair':
+        Auth.clientId = m.clientId; LS.set('kk.token', m.tok);
+        toast('Celular conectado! Esta TV já está no Spotify.');
+        updateAuthUI(); this.idle(); this.loop();
+        break;
+      case 'hello': toast('📱 Celular conectado a esta TV!'); break;
+      case 'track': {
+        if (m.lib && m.track?.id) Lib.put(m.track.id, m.lib);
+        if (m.key) { const o = LS.get('kk.offsets', {}); if (m.offset) o[m.key] = m.offset; else delete o[m.key]; LS.set('kk.offsets', o); }
+        if (m.playUri) this.hints[m.playUri] = { track: m.track, playUri: m.playUri };
+        if (St.open && St.track?.id === m.track?.id) {
+          if (m.playUri && St.playTrack?.uri !== m.playUri && m.playUri !== m.track.uri) { /* troca para versão: o acompanhamento ajusta */ }
+          loadOffset();
+          if (m.lib) loadLyrics(St.track);
+        }
+        break;
+      }
+      case 'off': if (St.open && offKey() === m.key) { St.offset = m.offset; renderOffset(); } { const o = LS.get('kk.offsets', {}); o[m.key] = m.offset; LS.set('kk.offsets', o); } break;
+      case 'sing': this.singer = m; if (St.open) this.showSinger(m); $('#resOv').hidden = true; FX.reset(); break;
+      case 'fb':
+        if (!St.open) return;
+        showFeedback(m.txt, m.lvl); FX.onFeedback(m.lvl, m.combo);
+        $('#liveScore').textContent = m.live; $('#comboLbl').textContent = m.combo >= 2 ? `combo ×${m.combo}` : 'pontos';
+        break;
+      case 'result':
+        this.lastResult = { ...m.entry };
+        $('#scorebar').hidden = true;
+        if (!St.open) { $('#stage').hidden = false; St.open = true; $('#tvIdle').hidden = true; }
+        showResults(m.entry, m.parts, m.silent);
+        break;
+      case 'clap':
+        if (this.lastResult) this.lastResult.total = m.total;
+        if (!$('#resOv').hidden) applyApplause(m.score, m.bonus, m.total);
+        break;
+      case 'close':
+        if (this.lastResult) this.lastResult.next = m.next;
+        $('#resOv').hidden = true; this.singer = null; $('#stSinger').hidden = true;
+        St.open = false; $('#stage').hidden = true; this.idle();
+        break;
+    }
+  }
+};
 
 /* ---------- telas ---------- */
 function showHome() {
@@ -1487,7 +2083,6 @@ function wire() {
   $('#gearBtn').onclick = () => { $('#cid2').value = Auth.clientId; $('#settingsDlg').showModal(); };
   $('#saveCfg').onclick = () => { const changed = $('#cid2').value.trim() !== Auth.clientId; Auth.clientId = $('#cid2').value; $('#cid').value = Auth.clientId; $('#settingsDlg').close(); if (changed) { LS.del('kk.token'); updateAuthUI(); toast('Client ID salvo. Conecte de novo.'); } };
   $('#logoutBtn').onclick = () => Auth.logout();
-  $('#clearLrc').onclick = () => { Object.keys(localStorage).filter(k => k.startsWith('kk.lrc.')).forEach(k => localStorage.removeItem(k)); toast('Letras coladas apagadas.'); };
   $('#closeCfg').onclick = () => $('#settingsDlg').close();
 
   $('#closeStage').onclick = () => closeStage();
@@ -1530,18 +2125,65 @@ function wire() {
   $('#lrcBtn').onclick = openLrc;
   $('#lrcClose').onclick = () => $('#lrcDlg').close();
   $('#lrcSave').onclick = () => {
-    const txt = $('#lrcText').value.trim(); if (!txt) return;
-    LS.set('kk.lrc.' + St.track.id, txt);
+    const txt = $('#lrcText').value.trim(); if (!txt) { toast('Cole a letra na caixa de texto primeiro.'); return; }
+    saveToLib({ lrc: txt, source: 'colada' });
     $('#lrcDlg').close();
     const synced = parseLRC(txt).length ? txt : '';
     applyLyrics({ synced, plain: txt, source: 'Letra colada por você' });
   };
-  $('#lrcRemove').onclick = () => { LS.del('kk.lrc.' + St.track.id); $('#lrcDlg').close(); setMsg('<div class="spinner"></div><p>Procurando a letra…</p>'); loadLyrics(St.track); };
+  $('#lrcRemove').onclick = () => { Lib.del(St.track.id); sendTrackToTv(); $('#lrcDlg').close(); setMsg('<div class="spinner"></div><p>Procurando a letra…</p>'); loadLyrics(St.track); };
+  $('#lyrSearch').addEventListener('submit', e => { e.preventDefault(); searchLyrics($('#lyrQ').value); });
+  $('#lyrRes').addEventListener('click', e => { const b = e.target.closest('[data-li]'); if (b) chooseLyrics(St.lyrResults[+b.dataset.li]); });
+
+  // biblioteca
+  const openLib = () => { renderLib(); $('#libDlg').showModal(); };
+  $('#openLib').onclick = () => { $('#settingsDlg').close(); openLib(); };
+  $('#partyLib').onclick = () => { $('#partyDlg').close(); openLib(); };
+  $('#libClose').onclick = () => $('#libDlg').close();
+  $('#libList').addEventListener('click', e => { const b = e.target.closest('[data-del]'); if (b) { Lib.del(b.dataset.del); renderLib(); } });
+  $('#libClear').onclick = () => { if (confirm('Apagar todas as letras da biblioteca deste aparelho?')) { LS.set('kk.lib', {}); renderLib(); } };
+  $('#libExport').onclick = () => {
+    const f = libFile(), url = URL.createObjectURL(f), a = document.createElement('a');
+    a.href = url; a.download = f.name; document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+    toast('Arquivo da biblioteca baixado.');
+  };
+  $('#libShare').onclick = async () => { try { await navigator.share({ files: [libFile()], title: 'Biblioteca do Karaokê' }); } catch {} };
+  $('#libImport').addEventListener('change', async e => {
+    const f = e.target.files[0]; e.target.value = ''; if (!f) return;
+    try { const n = Lib.importData(JSON.parse(await f.text())); renderLib(); toast(n ? `${n} letra(s) importada(s)!` : 'Nada novo: você já tinha essas letras.'); if (St.open) loadLyrics(St.track); }
+    catch (err) { toast('Não consegui importar: ' + err.message, 'err'); }
+  });
+
+  // TV
+  const openTv = () => { renderTvDlg(); $('#tvDlg').showModal(); };
+  $('#openTv').onclick = () => { $('#settingsDlg').close(); openTv(); };
+  $('#partyTv').onclick = () => { $('#partyDlg').close(); openTv(); };
+  $('#tvClose').onclick = () => $('#tvDlg').close();
+  $('#tvForm').addEventListener('submit', e => { e.preventDefault(); TVLink.pair($('#tvCodeIn').value); });
+  $('#tvUnlink').onclick = () => { LS.del('kk.tv.link'); renderTvDlg(); toast('TV desconectada.'); };
+  $('#tvTest').onclick = async () => { await TVLink.send({ t: 'hello' }); toast('Mensagem enviada. Deve aparecer um aviso na TV.'); };
+  $('#tvModeBtn').onclick = () => { LS.set('kk.tvmode', true); location.href = REDIRECT; };
+  $('#tvExit').onclick = () => TV.stop();
+  $('#tvLoginHere').onclick = () => { $('#tvIdle').hidden = true; document.body.classList.remove('tv'); $('#setup').hidden = false; toast('Faça o login normalmente. Depois a TV volta ao modo TV.'); };
+
+  // animações
+  $('#fxSel').value = FX.mode;
+  $('#fxSel').addEventListener('change', e => FX.setMode(e.target.value));
 
   window.addEventListener('resize', () => { if (St.open && St.lines.length) centerOn(Math.max(0, St.idx), true); });
   document.addEventListener('visibilitychange', () => { if (!document.hidden && St.open) requestWake(); });
   document.addEventListener('keydown', e => {
     if (!St.open || e.target.closest('input,textarea,select,dialog')) return;
+    if (TV.on) {
+      // controle remoto da TV: OK = tocar/pausar, ◀ ▶ = 5 s, ▲ ▼ = sincronia da letra
+      if (e.key === 'Enter') { e.preventDefault(); Player.toggle(); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); St.offset += 250; saveOffset(); toast('Letra mais tarde: ' + $('#offLbl').textContent); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); St.offset -= 250; saveOffset(); toast('Letra mais cedo: ' + $('#offLbl').textContent); }
+      else if (e.key === 'ArrowLeft') Player.seek(Player.now() - 5000);
+      else if (e.key === 'ArrowRight') Player.seek(Player.now() + 5000);
+      return;
+    }
     if (e.code === 'Space' && TS.on) { e.preventDefault(); tapSyncAction('tap'); }
     else if (e.code === 'Space') { e.preventDefault(); Player.toggle(); }
     else if (e.key === 'ArrowLeft') Player.seek(Player.now() - 5000);
@@ -1552,15 +2194,26 @@ function wire() {
     else if (e.key === 'Escape' && !document.fullscreenElement) closeStage();
   });
 }
-function openLrc() { $('#lrcText').value = LS.get('kk.lrc.' + St.track.id, ''); $('#lrcDlg').showModal(); }
+function openLrc() {
+  const e = Lib.get(St.track.id);
+  $('#lrcText').value = e?.lrc || '';
+  $('#lyrQ').value = cleanTitle(St.track.name) + ' ' + origArtist(St.track);
+  $('#lyrRes').innerHTML = '';
+  $('#lrcDlg').showModal();
+  searchLyrics($('#lyrQ').value);
+}
 
 /* ---------- início ---------- */
 (async function boot() {
+  Lib.migrate();
   wire();
+  FX.apply();
+  window.addEventListener('resize', () => { clearTimeout(FX.rt); FX.rt = setTimeout(() => FX.buildCrowd(), 300); });
   updatePlayIcons();
   await Auth.handleCallback();
   updateAuthUI();
   requestAnimationFrame(frame);
+  if (TV.detect()) { TV.start(); return; }
   if (Auth.loggedIn) {
     Player.initSDK();
     refreshDevices();
@@ -1569,7 +2222,7 @@ function openLrc() { $('#lrcText').value = LS.get('kk.lrc.' + St.track.id, ''); 
 })();
 
 // exposto só para testes no console
-window.__karaoke = { parseLRC, cleanTitle, origArtist, Player, St, Score, Mic, Party, applyLyrics, tuning, keyFit };
+window.__karaoke = { parseLRC, cleanTitle, origArtist, Player, St, Score, Mic, Party, applyLyrics, tuning, keyFit, Lib, FX, TV, TVLink, Relay };
 })();
 </script>
 </body>

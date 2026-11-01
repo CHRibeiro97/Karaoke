@@ -29,6 +29,39 @@ Como não existe a melodia oficial de cada música para comparar, a nota mede ri
 
 O **modo demonstração** funciona sem Spotify, com áudio sintetizado, e serve para testar o palco e a pontuação.
 
+## Animações no palco
+
+As animações seguem a ideia dos jogos de ritmo, com visual próprio do app:
+
+- **Pista de notas**: cada frase da letra vem descendo como uma nota colorida, com uma "cauda" do tamanho da frase. Quando a nota chega na barra dourada, solta faíscas.
+- **Micão**: mascote em forma de microfone que dança no ritmo da música. Ele pula e gira quando o cantor tira "Perfeito!", agita os braços no "Ótimo!" e fica cabisbaixo no "Ops…".
+- **Plateia**: balança no ritmo, levanta os braços nos acertos e acende as lanternas do celular a partir de 8 acertos seguidos.
+- **Combo em chamas**: a partir de 5 acertos seguidos, a borda da tela pega fogo. Também há chuva de confete no resultado e no aplauso.
+- Em 🏆 Festa → **Animações**, dá para escolher **Completas**, **Leves** (para celular ou TV mais fracos) ou **Desligadas**.
+
+## Letras: busca manual e biblioteca própria
+
+- **Buscar letra**: no palco, toque em **Letra…**. O app já busca com o nome da música, e você pode reescrever do jeito que quiser e escolher o resultado certo. Cada resultado mostra a duração e se a letra é sincronizada.
+- **📚 Minha biblioteca** (em ⚙ ou em 🏆 Festa): guarda as letras escolhidas, coladas e sincronizadas no toque, além dos ajustes de sincronia. Dá para **exportar** um arquivo, **compartilhar** pelo WhatsApp e outros apps, ou **importar** no outro aparelho. Importar só soma, nunca apaga.
+
+## Modo TV (Samsung e outras Smart TVs)
+
+A TV vira a tela do show, e o celular vira o microfone e o controle:
+
+1. Na TV, abra o navegador **Internet** e acesse o endereço do app. A TV entra sozinha no **modo TV** e mostra um código de 6 letras. Vale salvar o endereço nos favoritos.
+2. No celular, toque em **🏆 Festa → 📺 Conectar à TV** e digite o código. O celular faz o login do Spotify na TV, então não precisa digitar senha com o controle remoto.
+3. Para o som sair na TV, abra o **app do Spotify da TV** e, no palco do celular, escolha a TV como aparelho.
+4. A partir daí, a TV mostra a letra do que estiver tocando, com as animações, quem está cantando, a nota ao vivo e o resultado. O aplauso é medido pelo celular.
+
+Pelo controle remoto: **OK** toca e pausa, **◀ ▶** voltam e avançam 5 s, e **▲ ▼** ajustam a sincronia da letra.
+
+Limitações:
+
+- O navegador da TV não acessa microfone e não toca o Spotify sozinho. Por isso, o som vem do app do Spotify da TV e o microfone é o do celular.
+- O modo karaokê da Samsung (microfone pelo celular via SmartThings) é exclusivo do app Stingray Karaoke, e este app não consegue usar esse recurso. Por isso, o app não amplifica a sua voz nas caixas da TV.
+- Se a música parar quando você sai do app do Spotify da TV para o navegador, toque a música pelo celular numa caixa de som Bluetooth, ou espelhe o som do celular na TV.
+- A TV e o celular conversam pelo serviço público gratuito **ntfy.sh**. As mensagens são criptografadas com o código da TV e só levam o login, a letra, as notas e os nomes. O serviço limita a quantidade de mensagens, por isso a nota ao vivo na TV atualiza a cada ~12 s.
+
 Atalhos no computador: `espaço` toca/pausa, `←`/`→` voltam/avançam 5 s, `[`/`]` ajustam a sincronia, `F` liga a tela cheia e `Esc` sai do palco.
 
 ## Requisitos
@@ -91,3 +124,7 @@ Abra o app, cole o Client ID e clique em **Conectar ao Spotify**. O login usa o 
 | 403 ao buscar ou tocar | A conta que fez login precisa estar em *User Management* no Dashboard, e o dono do app precisa ter Premium ativo. |
 | No celular não sai som pelo navegador | Isso é esperado. Escolha o seu celular (app do Spotify) como aparelho, e a letra continua aqui. |
 | Letra fora do tempo | Use "Marcar 1ª frase" ou −/+ (0,25 s por toque). |
+| Letra não encontrada | No palco, toque em **Letra…** e busque com outro nome (por exemplo, sem "ao vivo" ou "feat."), ou cole a letra. |
+| A TV não sai da tela do código | Confira se digitou o código certo e se o celular está conectado ao Spotify. Se a TV foi reiniciada, o código continua o mesmo. |
+| A TV mostra a letra, mas sem som | Abra o app do Spotify da TV e escolha a TV como aparelho no palco do celular. |
+| O computador abriu no modo TV sem querer | Na tela da TV, toque em "Sair do modo TV". |
