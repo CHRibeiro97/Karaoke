@@ -44,6 +44,22 @@ As animações seguem a ideia dos jogos de ritmo, com visual próprio do app:
 - **Buscar letra**: no palco, toque em **Letra…**. O app já busca com o nome da música, e você pode reescrever do jeito que quiser e escolher o resultado certo. Cada resultado mostra a duração e se a letra é sincronizada.
 - **📚 Minha biblioteca** (em ⚙ ou em 🏆 Festa): guarda as letras escolhidas, coladas e sincronizadas no toque, além dos ajustes de sincronia. Dá para **exportar** um arquivo, **compartilhar** pelo WhatsApp e outros apps, ou **importar** no outro aparelho. Importar só soma, nunca apaga.
 
+## Dueto com dois celulares
+
+Um segundo celular pode virar o **2º microfone**. Cada celular calcula a nota de quem está cantando nele.
+
+1. **Sala da festa**: se tiver TV conectada, o código da TV já é a sala. Sem TV, vá em **📺 Conectar à TV → Criar sala para dueto** no celular principal.
+2. No 2º celular, abra o endereço do app, toque em **📱 Entrar como 2º microfone**, digite o seu nome e o código da sala. Ele não precisa de conta no Spotify.
+3. No celular principal, aparece um pedido de liberação. Ao aceitar, o login é passado para o 2º celular (o Spotify pode piscar a tela por um segundo).
+4. No 2º celular, toque em **🎤 Ativar microfone**. Ele fica esperando.
+5. Ao escolher uma música, a janela "Quem vai cantar?" passa a ter **🎤🎤 Dueto**: escolha quem canta em cada celular e como dividir:
+   - **Revezando as partes**: a letra é dividida em blocos (pelas pausas da música). A pessoa A canta um bloco, a B canta o seguinte, e o último bloco é dos dois juntos.
+   - **Os dois cantam tudo**.
+6. Na tela, cada frase vem marcada com a cor de quem canta (rosa = celular principal, azul = 2º celular, dourado = juntos), e um aviso mostra "Vez de…".
+7. No fim, sai a **nota de cada um** e a **nota da dupla**: a média das duas, mais um bônus de até 5 pontos por *sintonia* (quanto mais parecidas as notas, maior o bônus). O aplauso vale para a dupla. A TV mostra tudo isso.
+
+As notas entram no ranking de cada participante, marcadas como dueto.
+
 ## Modo TV (Samsung e outras Smart TVs)
 
 A TV vira a tela do show, e o celular vira o microfone e o controle:
@@ -128,3 +144,6 @@ Abra o app, cole o Client ID e clique em **Conectar ao Spotify**. O login usa o 
 | A TV não sai da tela do código | Confira se digitou o código certo e se o celular está conectado ao Spotify. Se a TV foi reiniciada, o código continua o mesmo. |
 | A TV mostra a letra, mas sem som | Abra o app do Spotify da TV e escolha a TV como aparelho no palco do celular. |
 | O computador abriu no modo TV sem querer | Na tela da TV, toque em "Sair do modo TV". |
+| O pedido do 2º microfone não aparece | No 2º celular, toque em "Pedir para entrar de novo". O celular principal precisa estar com o app aberto e conectado à sala. |
+| O 2º celular não pontua | Toque em "🎤 Ativar microfone" e libere o microfone no navegador. A tela dele precisa ficar acesa. |
+| A opção de dueto não aparece | O 2º celular precisa ter sido liberado, e precisam existir pelo menos 2 participantes no 🏆 Festa. |
