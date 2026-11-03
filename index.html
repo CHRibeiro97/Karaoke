@@ -291,13 +291,18 @@ dialog h4{font-family:var(--display);font-size:18px;margin:22px 0 4px}
 .scorebar.remote canvas,.scorebar.remote .note{visibility:hidden}
 
 /* Dueto */
-.ln.r-a .tx{text-decoration:underline 3px rgba(255,92,138,.55);text-underline-offset:.18em}
-.ln.r-b .tx{text-decoration:underline 3px rgba(92,225,230,.6);text-underline-offset:.18em}
-.ln.r-ab .tx{text-decoration:underline 3px rgba(255,210,94,.6);text-underline-offset:.18em}
-.ln.active.r-b .tx{background:linear-gradient(90deg,#5ce1e6 0,#5ce1e6 var(--p),#fff var(--p),#fff 100%);-webkit-background-clip:text;background-clip:text}
-.ln.active.r-a .tx{background:linear-gradient(90deg,#ff7aa0 0,#ff7aa0 var(--p),#fff var(--p),#fff 100%);-webkit-background-clip:text;background-clip:text}
+.ln[class*=" r-"] .tx{text-decoration:underline 3px var(--rc);text-underline-offset:.18em}
+.ln.r-a{--rc:#ff7aa0}.ln.r-b{--rc:#5ce1e6}.ln.r-c{--rc:#7dffb0}.ln.r-d{--rc:#c79bff}.ln.r-all{--rc:#ffd25e}
+.ln.active.r-a .tx,.ln.active.r-b .tx,.ln.active.r-c .tx,.ln.active.r-d .tx{background:linear-gradient(90deg,var(--rc) 0,var(--rc) var(--p),#fff var(--p),#fff 100%);-webkit-background-clip:text;background-clip:text}
 #turn{position:absolute;z-index:3;left:50%;top:2%;transform:translateX(-50%);padding:6px 16px;border-radius:999px;font-weight:800;font-size:clamp(14px,2vw,26px);white-space:nowrap;color:#1a0710;box-shadow:0 6px 20px rgba(0,0,0,.4)}
-#turn.r-a{background:#ff7aa0}#turn.r-b{background:#5ce1e6}#turn.r-ab{background:var(--gold)}
+#turn.r-a{background:#ff7aa0}#turn.r-b{background:#5ce1e6}#turn.r-c{background:#7dffb0}#turn.r-d{background:#c79bff}#turn.r-all{background:var(--gold)}
+.dot.c{background:#7dffb0}.dot.d{background:#c79bff}
+.duogrid.n3,.duogrid.n4{grid-template-columns:repeat(2,1fr)}
+body.tv .duogrid.n3{grid-template-columns:repeat(3,1fr)}body.tv .duogrid.n4{grid-template-columns:repeat(4,1fr)}
+.duocard.win{box-shadow:0 0 0 2px var(--gold),0 0 30px rgba(255,210,94,.35)}
+.duocard .pos{font-size:22px}
+.peerlist{list-style:none;padding:0;margin:8px 0 0}
+.peerlist li{display:flex;justify-content:space-between;align-items:center;padding:4px 0}
 .duobox{margin-top:16px;padding:14px;border-radius:14px;background:var(--panel2);border:1px solid var(--line)}
 .duorow{display:grid;grid-template-columns:14px 110px 1fr;align-items:center;gap:8px;margin-top:8px;font-size:14.5px}
 .duorow .sel{max-width:none;background-color:var(--panel)}
@@ -312,6 +317,44 @@ body.guest .top,body.guest main,body.guest #mini{display:none!important}
 body.guest #closeStage,body.guest #versBtn,body.guest #device,body.guest #lrcBtn,body.guest #tapSyncBtn,body.guest #finishBtn,body.guest #markBtn,body.guest .transport,body.guest .vol,body.guest #resOv .actions,body.guest .applause{display:none!important}
 body.guest #tvIdle h1{font-size:clamp(26px,7vw,44px)}
 
+/* Celular como controle + microfone (quando há TV) */
+#ctl{display:none}
+body.ctl #wrap,body.ctl #hwy,body.ctl #crowdRow{display:none!important}
+body.ctl #ctl{display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;gap:16px;position:relative;z-index:2;padding:10px 20px;text-align:center}
+body.ctl .scorebar .live{display:none}
+.ctl-top{display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.ctl-link{font-size:13px;font-weight:700;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:var(--muted)}
+.ctl-link.ok{background:rgba(125,255,176,.15);color:#7dffb0}
+.ctl-turn{font-family:var(--display);font-weight:800;font-size:clamp(24px,7vw,40px);padding:10px 22px;border-radius:18px;background:rgba(255,255,255,.06);transition:background .3s,color .3s}
+.ctl-turn.mine{background:#7dffb0;color:#0b2a17;animation:pop .3s}
+.ctl-turn.soon{background:var(--gold);color:#1a0710}
+.ctl-turn.wait{background:rgba(255,255,255,.06);color:rgba(255,255,255,.55)}
+.ring{--lvl:0;width:min(58vw,240px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle,rgba(255,92,138,.25) 0,transparent 70%)}
+.ring::before{content:"";position:absolute;inset:0;border-radius:50%;border:6px solid var(--accent);transform:scale(calc(.82 + var(--lvl) * .25));opacity:calc(.35 + var(--lvl) * .65);transition:transform .08s,opacity .08s;box-shadow:0 0 calc(var(--lvl) * 50px) var(--accent)}
+.ring-in{display:flex;flex-direction:column;align-items:center}
+.ring-in b{font-size:22px;color:var(--gold)}
+.ring-in span{font-family:var(--display);font-weight:800;font-size:64px;line-height:1}
+.ring-in small{color:var(--muted)}
+.ctl-fb{font-family:var(--display);font-weight:800;font-size:28px;min-height:1.3em}
+.ctl-hint{color:var(--muted);font-size:14px;margin:0}
+/* TV: painel ao vivo de cada cantor */
+#tvSingers{position:relative;z-index:2;display:flex;gap:14px;justify-content:center;padding:0 40px 6px}
+.tvs{flex:1;max-width:420px;background:rgba(15,10,22,.75);border:2px solid var(--rc);border-radius:18px;padding:10px 14px;position:relative;transition:box-shadow .2s,transform .2s}
+.tvs.singing{box-shadow:0 0 26px color-mix(in srgb,var(--rc) 55%,transparent);transform:translateY(-3px)}
+.tvs.fire{box-shadow:0 0 34px rgba(255,140,40,.8)}
+.tvs-h{display:flex;justify-content:space-between;align-items:baseline}
+.tvs-n{font-family:var(--display);font-weight:800;font-size:26px;color:var(--rc)}
+.tvs-note{font-weight:800;color:var(--gold);font-size:20px}
+.tvs-trail{width:100%;height:54px;display:block;margin:4px 0;border-radius:8px;background:rgba(255,255,255,.04)}
+.tvs-f{display:flex;align-items:center;gap:10px}
+.tvs-lv{flex:1;height:10px;border-radius:10px;background:rgba(255,255,255,.1);overflow:hidden}
+.tvs-lv i{display:block;height:100%;width:0;background:var(--rc);transition:width .1s}
+.tvs-sc{font-family:var(--display);font-size:34px;line-height:1}
+.tvs-cb{color:var(--gold);font-weight:700;font-size:15px;min-width:70px}
+.tvs-fb{position:absolute;left:50%;top:-16px;transform:translateX(-50%);font-family:var(--display);font-weight:800;font-size:24px;opacity:0;white-space:nowrap;pointer-events:none}
+.tvs-fb.show{animation:fbpop 1.2s ease-out}
+body:not(.tv) #tvSingers{display:none!important}
+
 /* Modo TV (tela de 3 metros) */
 #tvIdle{position:fixed;inset:0;z-index:15;display:grid;place-items:center;text-align:center;background:radial-gradient(ellipse at 50% 20%,#3a1440 0,var(--bg) 70%);padding:40px}
 .tv-wrap{max-width:1100px}
@@ -321,6 +364,7 @@ body.guest #tvIdle h1{font-size:clamp(26px,7vw,44px)}
 .tvcode span{color:var(--muted);font-size:20px}
 .tvcode b{font-family:ui-monospace,monospace;font-size:clamp(48px,6vw,92px);letter-spacing:.18em;color:var(--gold)}
 .tvcode small{color:var(--muted);font-size:18px}
+.tvrank{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:22px;font-size:24px}
 #tvLast{margin-top:26px;color:var(--muted);font-size:22px}
 #tvLast b{color:var(--text)}
 body.tv .top,body.tv main,body.tv #mini{display:none!important}
@@ -336,6 +380,9 @@ body.tv #fb{font-size:clamp(36px,4vw,64px)}
 body.tv #resOv .actions{display:none}
 body.tv .applause button{display:none}
 body.tv .stage-actions{width:auto}
+body.tv .controls .row{display:none}
+body.tv .lyrics-wrap{margin-top:34px}
+body.tv #turn{top:-30px}
 
 @media (max-width:720px){
   .scorebar{height:44px}.scorebar canvas{height:44px}
@@ -392,7 +439,7 @@ body.tv .stage-actions{width:auto}
       <div class="actions">
         <button class="btn spotify" id="loginBtn" type="button"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm4.6 14.4a.6.6 0 0 1-.9.2c-2.4-1.5-5.4-1.8-8.9-1a.6.6 0 1 1-.3-1.2c3.9-.9 7.2-.5 9.9 1.1.3.2.4.6.2.9zm1.2-2.7a.8.8 0 0 1-1.1.3c-2.7-1.7-6.9-2.2-10.2-1.2a.8.8 0 1 1-.4-1.5c3.7-1.1 8.4-.6 11.5 1.3.4.2.5.7.2 1.1zm.1-2.8C14.7 9 9.4 8.8 6.3 9.7a.9.9 0 1 1-.5-1.8c3.5-1.1 9.4-.9 13.1 1.3a.9.9 0 0 1-1 1.7z"/></svg>Conectar ao Spotify</button>
         <button class="btn" id="demoBtn" type="button">Testar o modo demonstração</button>
-        <button class="btn" id="guestBtn" type="button">📱 Entrar como 2º microfone</button>
+        <button class="btn" id="guestBtn" type="button">📱 Entrar como microfone extra</button>
       </div>
       <div class="warn" style="margin-top:18px">
         <b>No celular, o app do Spotify abriu e travou no “Aceito”?</b> Toque em
@@ -480,6 +527,15 @@ body.tv .stage-actions{width:auto}
     <div id="crowd"></div>
   </div>
 
+  <div id="ctl">
+    <div class="ctl-top"><span id="ctlLink" class="ctl-link"></span><button class="btn small" id="ctlLyrToggle" type="button"></button></div>
+    <div class="ctl-turn" id="ctlTurn">🎛️ Controle da música</div>
+    <div class="ring" id="ctlRing"><div class="ring-in"><b id="ctlNote">–</b><span id="ctlScore">0</span><small id="ctlCombo">pontos</small></div></div>
+    <div class="ctl-fb" id="ctlFb"></div>
+    <p class="ctl-hint">A letra está na TV 📺 — cante olhando para ela.</p>
+  </div>
+  <div id="tvSingers" hidden></div>
+
   <div class="controls">
     <div class="scorebar" id="scorebar" hidden>
       <span class="note" id="noteLbl" title="Nota que você está cantando">–</span>
@@ -566,8 +622,8 @@ body.tv .stage-actions{width:auto}
   </ol>
   <div id="tvStatus" class="warn" hidden></div>
   <div id="roomCreate" style="margin-top:14px">
-    <p class="sub2"><b>Sem TV?</b> Crie só a sala da festa para conectar um 2º celular como microfone (duetos).</p>
-    <button class="btn" id="roomBtn">🎤🎤 Criar sala para dueto</button>
+    <p class="sub2"><b>Sem TV?</b> Crie só a sala da festa para conectar outros celulares como microfones (dueto, trio, quarteto ou batalha).</p>
+    <button class="btn" id="roomBtn">🎤🎤 Criar sala da festa</button>
   </div>
   <p class="sub2" style="margin-top:14px">Para tocar o som na TV, escolha a TV como aparelho no palco (ela aparece se o app do Spotify da TV estiver aberto). O celular fica sendo o microfone e o controle.</p>
   <div class="actions"><button class="btn" id="tvUnlink" hidden>Desconectar TV</button><button class="btn" id="tvTest" hidden>Testar</button><button class="btn primary" id="tvClose">Fechar</button></div>
@@ -582,7 +638,7 @@ body.tv .stage-actions{width:auto}
     <div id="micBox" hidden>
       <button class="btn primary" id="micOn" style="font-size:18px;padding:14px 24px">🎤 Ativar microfone</button>
       <div class="meter" style="max-width:320px;margin:14px auto 0"><i id="micLvl"></i></div>
-      <p class="sub2" id="micHint">Toque uma vez para o navegador liberar o microfone. Ele fica ligado esperando o dueto.</p>
+      <p class="sub2" id="micHint">Toque uma vez para o navegador liberar o microfone. Ele fica ligado esperando a sua vez.</p>
       <button class="btn small" id="askAgain" hidden>Pedir para entrar de novo</button>
     </div>
     <div id="tvLast"></div>
@@ -610,18 +666,20 @@ body.tv .stage-actions{width:auto}
   <p class="sub2" id="singerSong"></p>
   <div class="chips" id="sList"></div>
   <div id="duoBox" class="duobox" hidden>
-    <h4 style="margin-top:0">🎤🎤 Dueto com o 2º microfone</h4>
-    <div class="duorow"><span class="dot a"></span><span>Neste celular</span><select class="sel" id="duoA"></select></div>
-    <div class="duorow"><span class="dot b"></span><span>No 2º celular</span><select class="sel" id="duoB"></select></div>
-    <div class="duorow"><span></span><span>Como dividir</span><select class="sel" id="duoMode"><option value="revezar">Revezando as partes</option><option value="juntos">Os dois cantam tudo</option></select></div>
-    <button class="btn primary" id="duoGo" style="margin-top:10px">Começar dueto</button>
+    <h4 style="margin-top:0">🎤🎤 Cantar em grupo (vários celulares)</h4>
+    <div id="grpRows"></div>
+    <div class="duorow"><span></span><span>Como vai ser</span><select class="sel" id="duoMode">
+      <option value="revezar">Revezando as partes</option>
+      <option value="juntos">Todos cantam tudo (nota do grupo)</option>
+      <option value="batalha">⚔️ Batalha (todos cantam, vence a maior nota)</option></select></div>
+    <button class="btn primary" id="duoGo" style="margin-top:10px">Começar</button>
   </div>
   <div class="actions"><button class="btn" id="noScore">Só cantar, sem nota</button><button class="btn" id="cancelSing">Cancelar</button></div>
 </dialog>
 
 <dialog id="guestDlg">
-  <h3>📱 Entrar como 2º microfone</h3>
-  <p class="sub2">Use isto no celular de quem vai fazer dueto. O celular principal libera a entrada, e não precisa de conta no Spotify aqui.</p>
+  <h3>📱 Entrar como microfone extra</h3>
+  <p class="sub2">Use isto no celular de quem vai cantar junto (dá para ter até 3 microfones extras). O celular principal libera a entrada, e não precisa de conta no Spotify aqui.</p>
   <form id="guestForm">
     <label>Seu nome<input class="field" id="gName" maxlength="20" autocomplete="off" required></label>
     <label>Código da sala (aparece na TV ou no celular principal, em 📺 Conectar à TV)<input class="field" id="gCode" maxlength="7" autocomplete="off" autocapitalize="characters" spellcheck="false" required style="text-transform:uppercase;letter-spacing:.15em;font-weight:700"></label>
@@ -773,12 +831,12 @@ const Auth = {
         await TVLink.send({ t: 'pair', clientId: this.clientId, tok, to: pk.to || 'tv' }, pk.tv);
         LS.set('kk.tv.link', pk.tv);
         if (pk.to) {
-          const nm = pk.guest || 'Microfone 2';
-          LS.set('kk.peer', { id: pk.to, name: nm });
+          const nm = pk.guest || 'Microfone extra';
+          TVLink.addPeer({ id: pk.to, name: nm });
           if (!Party.d.players.some(p => p.name.toLowerCase() === nm.toLowerCase())) Party.add(nm);
           toast(`${nm} foi liberado(a) como 2º microfone!`);
         }
-        else toast('TV conectada! Em alguns segundos ela entra no Spotify.');
+        else { LS.set('kk.hasTv', true); toast('TV conectada! Em alguns segundos ela entra no Spotify.'); }
       } catch (e) { toast('Não consegui conectar: ' + e.message, 'err'); }
       return;
     }
@@ -980,6 +1038,8 @@ async function refreshDevices() {
   if (!Auth.loggedIn) return;
   try { const j = await sp('/me/player/devices'); Player.devices = (j?.devices || []).filter(d => d.id); } catch { Player.devices = []; }
   if (Player.sdkId && !Player.devices.some(d => d.id === Player.sdkId)) Player.devices.unshift({ id: Player.sdkId, name: 'Karaokê Web', type: 'Computer' });
+  const tvDev = LS.get('kk.hasTv', false) && !LS.get('kk.devUser', false) && Player.devices.find(d => d.type === 'TV');
+  if (tvDev && Player.deviceId !== tvDev.id && Player.mode !== 'demo') { Player.deviceId = tvDev.id; Player.mode = 'remote'; }
   if (!Player.deviceId || !Player.devices.some(d => d.id === Player.deviceId)) {
     const active = Player.devices.find(d => d.is_active) || Player.devices.find(d => d.id === Player.sdkId) || Player.devices[0];
     if (active) { Player.deviceId = active.id; if (Player.mode !== 'demo') Player.mode = active.id === Player.sdkId ? 'sdk' : 'remote'; }
@@ -1001,7 +1061,7 @@ async function chooseDevice(id) {
   if (id === '__refresh' || !id) { await refreshDevices(); return; }
   if (Player.sdk && id === Player.sdkId) Player.sdk.activateElement().catch(() => {});
   const wasPlaying = Player.playing, pos = Player.now();
-  Player.deviceId = id; LS.set('kk.device', id);
+  Player.deviceId = id; LS.set('kk.device', id); LS.set('kk.devUser', true);
   if (Player.mode !== 'demo') Player.mode = id === Player.sdkId ? 'sdk' : 'remote';
   Player.lastCmd = performance.now();
   if (Player.currentUri) {
@@ -1076,6 +1136,7 @@ function openStage(track, { autoplay = true, replace = false } = {}) {
   FX.reset();
   requestWake();
   sendTrackToTv();
+  Ctl.update(); ctlTurn(-1);
 }
 function closeStage(fromPop = false) {
   if (!St.open) return;
@@ -1136,8 +1197,8 @@ function applyLyrics(res) {
 function buildLyricsDOM() {
   const box = $('#lyrics');
   if (St.lines.length) {
-    St.roles = St.duet ? duetRoles(St.lines, St.duet.mode) : [];
-    box.innerHTML = St.lines.map((l, i) => `<div class="ln${l.text ? '' : ' gap'}${St.roles[i] ? ' r-' + St.roles[i] : ''}" data-i="${i}"><span class="tx">${l.text ? esc(l.text) : '♪'}</span></div>`).join('');
+    St.roles = St.duet ? duetRoles(St.lines, St.duet.mode, St.duet.singers.length) : [];
+    box.innerHTML = St.lines.map((l, i) => `<div class="ln${l.text ? '' : ' gap'}${St.roles[i] ? ' r-' + roleCls(St.roles[i]) : ''}" data-i="${i}"><span class="tx">${l.text ? esc(l.text) : '♪'}</span></div>`).join('');
   } else if (St.plain) {
     box.innerHTML = `<div class="plain">${esc(St.plain)}</div>`;
   } else box.innerHTML = '';
@@ -1165,6 +1226,7 @@ function setActive(i) {
   if (i >= 0 && els[i]) els[i].classList.add('active');
   if (i > St.idx && i >= 0) FX.onLineStart(i);
   if (St.duet) showTurn(i >= 0 && !St.lines[i].text ? i + 1 : Math.max(i, St.lines.findIndex(l => l.text)));
+  ctlTurn(i);
   St.idx = i;
   centerOn(Math.max(0, i));
 }
@@ -1413,18 +1475,23 @@ function renderParty() {
 }
 let pendingSong = null;
 function startSong(track, opts = {}) {
-  const d = Party.d, peer = TVLink.peer;
+  const d = Party.d, peers = TVLink.peers;
   if (!d.on || !d.players.length) { openStage(track, opts); return; }
   pendingSong = { track, opts };
-  const canDuo = !!peer && !track.demo && d.players.length >= 2;
+  const canDuo = peers.length > 0 && !track.demo && d.players.length >= 2;
   $('#duoBox').hidden = !canDuo;
   if (canDuo) {
-    const opt = sel => d.players.map(p => `<option value="${p.id}" ${p.id === sel ? 'selected' : ''}>${esc(p.name)}</option>`).join('');
-    const pb = d.players.find(p => p.name.toLowerCase() === (peer.name || '').toLowerCase()) || d.players[1];
-    const pa = Party.next()?.id !== pb.id ? Party.next() : d.players.find(p => p.id !== pb.id);
-    $('#duoA').innerHTML = opt(pa?.id); $('#duoB').innerHTML = opt(pb.id);
+    const opt = (sel, none) => (none ? '<option value="">— não canta —</option>' : '') + d.players.map(p => `<option value="${p.id}" ${p.id === sel ? 'selected' : ''}>${esc(p.name)}</option>`).join('');
+    const byName = n => d.players.find(p => p.name.toLowerCase() === (n || '').toLowerCase());
+    const taken = new Set(peers.map(pe => byName(pe.name)?.id).filter(Boolean));
+    const host = [Party.next(), ...d.players].find(p => p && !taken.has(p.id)) || d.players[0];
+    let h = `<div class="duorow"><span class="dot a"></span><span>Neste celular</span><select class="sel" data-dev="host">${opt(host.id)}</select></div>`;
+    peers.forEach((pe, i) => {
+      const def = byName(pe.name);
+      h += `<div class="duorow"><span class="dot ${'bcd'[i]}"></span><span>📱 ${esc(pe.name)}</span><select class="sel" data-dev="${esc(pe.id)}">${opt(def?.id, true)}</select></div>`;
+    });
+    $('#grpRows').innerHTML = h;
   }
-  $('#singerSong').textContent = `${cleanTitle(track.name)} — ${track.artists.join(', ')}`;
   const nx = Party.next();
   $('#sList').innerHTML = d.players.map(p => `<button class="chip pick${p.id === nx?.id ? ' next' : ''}" data-pid="${p.id}">${avatar(p)}${esc(p.name)}${p.id === nx?.id ? ' <small>· é a vez</small>' : ''}</button>`).join('');
   $('#singerDlg').showModal();
@@ -1444,13 +1511,15 @@ const Score = {
     try { await Mic.start(); }
     catch { toast('Sem acesso ao microfone — essa música fica sem nota. Libere o microfone para este site nas configurações do navegador.', 'err'); return; }
     this.reset(); this.player = player; this.active = true; this.role = role;
-    if (role === 'a') { Duo.guest = null; Duo.pending = null; }
+    if (role === 'a') { Duo.guests = {}; Duo.pending = null; }
     $('#stSinger').textContent = '🎤 ' + player.name; $('#stSinger').hidden = false;
     $('#scorebar').hidden = false; $('#scorebar').classList.remove('remote'); $('#finishBtn').hidden = TV.on;
     $('#liveScore').textContent = '0'; $('#comboLbl').textContent = 'pontos'; $('#noteLbl').textContent = '–';
     clearInterval(this.timer); this.timer = setInterval(() => this.tick(), 50);
     this.lastTv = 0;
-    if (!TV.on) TVLink.send({ t: 'sing', name: player.name, color: player.color, uri: St.playTrack?.uri, duet: St.duet || null });
+    if (!TV.on) TVLink.send({ t: 'sing', name: player.name, color: player.color, uri: St.playTrack?.uri, duet: St.duet || null, tv: LS.get('kk.hasTv', false) });
+    $('#ctlScore').textContent = '0'; $('#ctlCombo').textContent = 'pontos'; $('#ctlFb').textContent = '';
+    ctlTurn(St.idx);
     requestAnimationFrame(() => St.open && St.lines.length && centerOn(Math.max(0, St.idx), true));
   },
   cancel() {
@@ -1478,7 +1547,10 @@ const Score = {
     this.trail.push({ t: pos, m: midi });
     while (this.trail.length && this.trail[0].t < pos - 6000) this.trail.shift();
     const nn = midi != null ? noteName(midi) : '–';
-    if (nn !== this.lastNote) { $('#noteLbl').textContent = nn; this.lastNote = nn; }
+    if (nn !== this.lastNote) { $('#noteLbl').textContent = nn; $('#ctlNote').textContent = nn; this.lastNote = nn; }
+    const lvl = voiced ? clamp((20 * Math.log10(a.rms / Math.max(bg, 0.004))) / 24, 0.05, 1) : 0;
+    $('#ctlRing').style.setProperty('--lvl', lvl.toFixed(2));
+    if ((this.tk = (this.tk || 0) + 1) % 2 === 0 && Live.ok()) TVLink.send({ t: 'lvl', who: this.role || 'a', l: +lvl.toFixed(2), m: midi != null ? +midi.toFixed(2) : null, p: Math.round(pos) });
     if (St.lines.length) {
       const lt = pos - St.offset, i = findIndex(lt);
       if (i !== this.curLine) { if (this.curLine >= 0) this.evalLine(this.curLine); this.curLine = i; }
@@ -1509,8 +1581,13 @@ const Score = {
     $('#liveScore').textContent = live;
     $('#comboLbl').textContent = this.combo >= 2 ? `combo ×${this.combo}` : 'pontos';
     // para a TV: poucas mensagens (limite do canal gratuito): 1 a cada 12 s, ou 20–25 s em dueto
-    const now = Date.now(), gap = St.duet ? (this.role === 'b' ? 25000 : 20000) : 12000;
-    if (!this.lastTv || now - this.lastTv > gap) { this.lastTv = now; TVLink.send({ t: 'fb', txt, lvl: lv[1], live, combo: this.combo, who: this.role || 'a' }); }
+    const n = St.duet ? St.duet.singers.length : 1;
+    const now = Date.now(), gap = n === 1 ? 12000 : this.role === 'a' ? 20000 : 15000 * n;
+    const slow = !this.lastTv || now - this.lastTv > gap;
+    if (slow && !Live.ok()) this.lastTv = now;
+    TVLink.send({ t: 'fb', txt: lv[0], lvl: lv[1], live, combo: this.combo, who: this.role || 'a', name: this.player?.name, slow });
+    $('#ctlScore').textContent = live; $('#ctlCombo').textContent = this.combo >= 2 ? `combo ×${this.combo}` : 'pontos';
+    const cf = $('#ctlFb'); cf.className = 'ctl-fb lvl-' + lv[1]; cf.textContent = txt;
   },
   draw(pos) {
     const c = $('#trail'), w = c.clientWidth, h = c.clientHeight; if (!w) return;
@@ -1616,11 +1693,16 @@ function showResults(e, parts, silent) {
   $('#resRank').onclick = () => { renderParty(); $('#partyDlg').showModal(); };
   $('#resNext').onclick = () => {
     const n = Party.next();
-    TVLink.send({ t: 'close', next: n?.name || '' });
+    TVLink.send({ t: 'close', next: n?.name || '', rank: miniRank() });
     closeStage();
     $('#q').value = ''; $('#q').focus();
     if (n) toast(`Vez de ${n.name}! Escolha a música na busca.`);
   };
+}
+function miniRank() {
+  const d = Party.d;
+  return d.players.map(p => { const h = d.history.filter(x => x.pid === p.id); return { name: p.name, best: h.length ? Math.max(...h.map(x => x.total)) : 0, n: h.length }; })
+    .filter(x => x.n).sort((a, b) => b.best - a.best).slice(0, 5);
 }
 function countUp(el, from, to, ms) {
   const t0 = performance.now();
@@ -1971,11 +2053,28 @@ const DEV = LS.get('kk.dev', '') || (() => { const d = randomString(10); LS.set(
 const newCode = () => Array.from(crypto.getRandomValues(new Uint8Array(6)), b => CODE_ABC[b % CODE_ABC.length]).join('');
 const TVLink = {
   get code() { return LS.get('kk.tv.link', ''); },
-  get peer() { return LS.get('kk.peer', null); },   // 2º microfone liberado nesta sala
+  // celulares extras (microfones) liberados nesta sala: até 3, além do principal
+  get peers() {
+    const old = LS.get('kk.peer', null);
+    if (old) { LS.del('kk.peer'); LS.set('kk.peers', [old]); }
+    return LS.get('kk.peers', []) || [];
+  },
+  addPeer(p) {
+    let l = this.peers.filter(x => x.id !== p.id && x.name.toLowerCase() !== p.name.toLowerCase());
+    l.push(p); if (l.length > 3) l = l.slice(-3);
+    LS.set('kk.peers', l);
+  },
+  removePeer(id) { LS.set('kk.peers', this.peers.filter(x => x.id !== id)); },
   es: null,
   async send(obj, code = this.code) {
     if (!code || TV.role === 'tv') return;
-    try { await Relay.publish(code, { ...obj, from: DEV }); } catch (e) { console.warn('sala', e); }
+    const msg = { ...obj, from: DEV };
+    // mensagens de tempo real vão pelo canal direto com a TV; se ele não existir, as frequentes são descartadas
+    if (obj.t === 'lvl' || obj.t === 'fb') {
+      if (Live.send(msg)) return;
+      if (obj.t === 'lvl' || obj.slow === false) return;
+    }
+    try { await Relay.publish(code, msg); } catch (e) { console.warn('sala', e); }
   },
   async pair(code, extra = {}) {
     code = code.toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -1999,16 +2098,78 @@ const Host = {
     if (m.t === 'join') {
       if (this.asking) return; this.asking = true;
       setTimeout(() => {
-        const ok = confirm(`📱 “${m.name || 'Outro celular'}” quer entrar na festa como 2º microfone. Liberar?`);
+        const ok = confirm(`📱 “${m.name || 'Outro celular'}” quer entrar na festa como microfone extra. Liberar?`);
         this.asking = false;
         if (ok) TVLink.pair(TVLink.code, { to: m.from, guest: m.name || 'Microfone 2' });
       }, 50);
     } else if (m.t === 'ready') {
-      LS.set('kk.peer', { id: m.from, name: m.name || 'Microfone 2' });
+      TVLink.addPeer({ id: m.from, name: m.name || 'Microfone extra' });
       const d = Party.d;
       if (m.name && !d.players.some(p => p.name.toLowerCase() === m.name.toLowerCase())) Party.add(m.name);
-      toast(`🎤 ${m.name || 'O 2º microfone'} está pronto para duetos!`);
+      toast(`🎤 ${m.name || 'O microfone extra'} está pronto para cantar em grupo!`);
     } else if (m.t === 'gres') Duo.onGuest(m);
+    else if (m.t === 'tvup') { LS.set('kk.hasTv', true); Ctl.update(); Live.connect(true); }
+    else if (m.t === 'rtc-answer' && m.to === DEV) Live.onAnswer(m);
+  }
+};
+
+/* ---------- canal direto (WebRTC) celular → TV, para o palco reagir na hora ---------- */
+const Live = {
+  pc: null, ch: null, tries: 0, pending: false, state: 'off',
+  ok() { return this.ch && this.ch.readyState === 'open'; },
+  send(m) { if (!this.ok()) return false; try { this.ch.send(JSON.stringify(m)); return true; } catch { return false; } },
+  setState(s) { this.state = s; Ctl.update(); },
+  async gather(pc) {
+    if (pc.iceGatheringState === 'complete') return;
+    await new Promise(res => { const t = setTimeout(res, 2500); pc.addEventListener('icegatheringstatechange', () => { if (pc.iceGatheringState === 'complete') { clearTimeout(t); res(); } }); });
+  },
+  // celular: cria a oferta e manda pela sala; a TV responde
+  async connect(force = false) {
+    if (TV.role === 'tv' || !TVLink.code || !window.RTCPeerConnection) return;
+    if (!LS.get('kk.hasTv', false) && !force) return;
+    if (this.ok() || this.pending) return;
+    if (this.tries >= 6) { this.setState('fallback'); return; }
+    this.tries++; this.pending = true; this.setState('connecting');
+    try { this.pc?.close(); } catch {}
+    const pc = this.pc = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+    const ch = this.ch = pc.createDataChannel('karaoke', { ordered: false, maxRetransmits: 0 });
+    ch.onopen = () => { this.pending = false; this.tries = 0; this.setState('live'); };
+    ch.onclose = () => { this.setState('fallback'); setTimeout(() => this.connect(), 4000); };
+    pc.onconnectionstatechange = () => { if (['failed', 'disconnected'].includes(pc.connectionState)) { this.pending = false; this.setState('fallback'); } };
+    await pc.setLocalDescription(await pc.createOffer());
+    await this.gather(pc);
+    TVLink.send({ t: 'rtc-offer', sdp: pc.localDescription.sdp });
+    setTimeout(() => { if (!this.ok()) { this.pending = false; this.setState('fallback'); } }, 12000);
+  },
+  async onAnswer(m) { try { await this.pc?.setRemoteDescription({ type: 'answer', sdp: m.sdp }); } catch (e) { console.warn(e); } },
+  // TV: aceita a oferta de cada celular
+  peers: {},
+  async onOffer(m) {
+    if (!window.RTCPeerConnection) return; // TV sem WebRTC: fica no canal de reserva
+    try { this.peers[m.from]?.close(); } catch {}
+    const pc = this.peers[m.from] = new RTCPeerConnection({ iceServers: [{ urls: 'stun:stun.l.google.com:19302' }] });
+    pc.ondatachannel = ev => { ev.channel.onmessage = e => { try { TV.onMsg({ ...JSON.parse(e.data), rt: true }); } catch {} }; };
+    await pc.setRemoteDescription({ type: 'offer', sdp: m.sdp });
+    await pc.setLocalDescription(await pc.createAnswer());
+    await this.gather(pc);
+    try { await Relay.publish(TV.code, { t: 'rtc-answer', to: m.from, sdp: pc.localDescription.sdp, from: DEV }); } catch (e) { console.warn(e); }
+  }
+};
+
+/* ---------- celular como controle + microfone quando há TV ---------- */
+const Ctl = {
+  get wanted() { return !TV.on || TV.role === 'mic' ? !!TVLink.code && LS.get('kk.hasTv', false) : false; },
+  get showLyrics() { return LS.get('kk.ctlLyrics', false); },
+  update() {
+    const on = this.wanted && !this.showLyrics && !(St.track?.demo);
+    document.body.classList.toggle('ctl', on);
+    const st = $('#ctlLink');
+    if (st) {
+      st.textContent = Live.state === 'live' ? '📺 TV ao vivo' : Live.state === 'connecting' ? '📺 conectando à TV…' : '📺 TV (modo econômico)';
+      st.className = 'ctl-link ' + (Live.state === 'live' ? 'ok' : '');
+    }
+    const t = $('#ctlLyrToggle'); if (t) t.textContent = this.showLyrics ? 'Esconder letra neste celular' : 'Ver letra neste celular também';
+    if (St.open && St.lines.length) requestAnimationFrame(() => centerOn(Math.max(0, St.idx), true));
   }
 };
 function sendTrackToTv(withLyrics = false) {
@@ -2019,17 +2180,22 @@ function sendTrackToTv(withLyrics = false) {
 }
 function renderTvDlg() {
   $('#tvUrl').textContent = REDIRECT;
-  const c = TVLink.code, peer = TVLink.peer;
+  const c = TVLink.code, peers = TVLink.peers;
   $('#tvStatus').hidden = !c; $('#tvUnlink').hidden = !c; $('#tvTest').hidden = !c;
   $('#roomCreate').hidden = !!c;
-  if (c) $('#tvStatus').innerHTML = `✅ Sala da festa: <b style="letter-spacing:.12em">${esc(c)}</b>. Se tiver TV com esse código, a letra, as notas e os resultados aparecem nela.<br>📱 2º microfone: ${peer ? `<b>${esc(peer.name)}</b> conectado` : 'no outro celular, abra o app e toque em “Entrar como 2º microfone” com este código'}.`;
+  if (c) $('#tvStatus').innerHTML = `✅ Sala da festa: <b style="letter-spacing:.12em">${esc(c)}</b>. Se tiver TV com esse código, a letra, as notas e os resultados aparecem nela.
+    <br>📱 Microfones extras (até 3): ${peers.length ? '' : 'nos outros celulares, abra o app e toque em “Entrar como 2º microfone” com este código.'}
+    ${peers.length ? `<ul class="peerlist">${peers.map(p => `<li><span>🎤 <b>${esc(p.name)}</b></span><button class="btn small" data-unpeer="${esc(p.id)}">Remover</button></li>`).join('')}</ul>` : ''}`;
 }
 
-/* ---------- duetos ---------- */
-// Divide a letra em blocos (separados por pausas) e alterna: A, B, A, B… e o último bloco é dos dois.
-function duetRoles(lines, mode) {
+/* ---------- canto em grupo (2 a 4 celulares) ---------- */
+const ROLE_COL = { a: '#ff7aa0', b: '#5ce1e6', c: '#7dffb0', d: '#c79bff' };
+const roleCls = r => r ? (r.length > 1 ? 'all' : r) : '';
+// Divide a letra em blocos (separados por pausas) e faz rodízio entre os cantores; o último bloco é de todos.
+function duetRoles(lines, mode, n = 2) {
   if (!lines.length) return [];
-  if (mode === 'juntos') return lines.map(l => l.text ? 'ab' : null);
+  const all = 'abcd'.slice(0, n);
+  if (mode !== 'revezar') return lines.map(l => l.text ? all : null);
   const blk = []; let b = 0, prevText = null;
   lines.forEach((l, i) => {
     if (!l.text) { if (prevText !== null) b++; prevText = null; blk.push(null); return; }
@@ -2037,66 +2203,97 @@ function duetRoles(lines, mode) {
     blk.push(b); prevText = i;
   });
   const ids = [...new Set(blk.filter(x => x !== null))];
-  if (ids.length < 3) { let k = 0; return lines.map(l => l.text ? (Math.floor(k++ / 2) % 2 ? 'b' : 'a') : null); }
+  if (ids.length < n + 1) { let k = 0; return lines.map(l => l.text ? all[Math.floor(k++ / 2) % n] : null); }
   const last = ids[ids.length - 1];
-  return blk.map(x => x === null ? null : x === last ? 'ab' : (ids.indexOf(x) % 2 ? 'b' : 'a'));
+  return blk.map(x => x === null ? null : x === last ? all : all[ids.indexOf(x) % n]);
 }
 const myLine = i => !St.duet || !Score.role || (St.roles[i] || '').includes(Score.role);
+const grpName = r => St.duet?.singers.find(s => s.role === r)?.name || r;
 function showTurn(i) {
   const el = $('#turn');
-  if (!St.duet || i < 0 || !St.roles[i]) { el.hidden = true; return; }
-  const r = St.roles[i], d = St.duet;
-  el.hidden = false;
-  el.className = 'turn r-' + r;
-  el.textContent = r === 'ab' ? `🎤🎤 ${d.a.name} e ${d.b.name}, juntos!` : `🎤 Vez de ${r === 'a' ? d.a.name : d.b.name}`;
+  if (!St.duet || St.duet.mode !== 'revezar' || i < 0 || !St.roles[i]) {
+    if (St.duet && St.duet.mode !== 'revezar') { el.hidden = false; el.className = 'turn r-all'; el.textContent = St.duet.mode === 'batalha' ? '⚔️ Batalha: todos cantam!' : '🎤 Todos juntos!'; }
+    else el.hidden = true;
+    return;
+  }
+  const r = St.roles[i];
+  el.hidden = false; el.className = 'turn r-' + roleCls(r);
+  el.textContent = r.length > 1 ? (r.length === St.duet.singers.length ? '🎤 Todos juntos!' : '🎤 ' + [...r].map(grpName).join(' e ')) : `🎤 Vez de ${grpName(r)}`;
+}
+// celular-controle: diz a quem está segurando o celular se é a vez dele
+function ctlTurn(i) {
+  const el = $('#ctlTurn'); if (!el || !document.body.classList.contains('ctl')) return;
+  if (!Score.active) { el.textContent = TV.role === 'mic' ? '🎧 Acompanhando a música' : '🎛️ Controle da música'; el.className = 'ctl-turn'; return; }
+  if (!St.lines.length) { el.textContent = '🎤 Cante!'; el.className = 'ctl-turn mine'; return; }
+  const L = St.lines[i], now = i >= 0 && L?.text;
+  const nx = now ? i : St.lines.findIndex((l, k) => k > i && l.text);
+  const r = St.roles[nx] || '';
+  const mine = !St.duet || r.includes(Score.role);
+  el.textContent = mine ? (now ? '🎤 Sua vez — cante!' : '🎤 Prepare-se, você é o próximo') : `⏸ Vez de ${[...r].map(grpName).join(' e ')}`;
+  el.className = 'ctl-turn ' + (mine ? (now ? 'mine' : 'soon') : 'wait');
 }
 const Duo = {
-  pending: null, guest: null, timer: null,
-  onGuest(m) { this.guest = m; if (this.pending) this.complete(); },
+  pending: null, guests: {}, timer: null,
+  expected() { return (St.duet?.singers || []).filter(s => s.role !== 'a').map(s => s.dev); },
+  onGuest(m) { this.guests[m.from] = m; if (this.pending && this.expected().every(d => this.guests[d])) this.complete(); },
   hostFinished(entry, parts, silent) {
-    this.pending = { entry, parts, silent };
+    this.pending = { entry, parts, silent, group: St.duet };
     TVLink.send({ t: 'end' });
-    if (this.guest) return this.complete();
-    $('#resOv').innerHTML = `<div class="resbox"><div class="spinner" style="margin-top:30vh"></div><p class="sub2">Juntando a nota do 2º microfone…</p></div>`;
+    if (this.expected().every(d => this.guests[d])) return this.complete();
+    $('#resOv').innerHTML = `<div class="resbox"><div class="spinner" style="margin-top:30vh"></div><p class="sub2">Juntando as notas dos outros microfones…</p></div>`;
     $('#resOv').hidden = false;
-    clearTimeout(this.timer); this.timer = setTimeout(() => this.complete(), 9000);
+    clearTimeout(this.timer); this.timer = setTimeout(() => this.complete(), 10000);
   },
   complete() {
     clearTimeout(this.timer);
-    const a = this.pending, g = this.guest; this.pending = this.guest = null;
+    const a = this.pending, gs = this.guests; this.pending = null; this.guests = {};
     if (!a) return;
-    if (!g) { showResults(a.entry, a.parts, a.silent); TVLink.send({ t: 'result', entry: a.entry, parts: a.parts, silent: a.silent }); return; }
-    const d = Party.d;
-    let pb = d.players.find(p => p.name.toLowerCase() === (g.entry.name || '').toLowerCase());
-    if (!pb) { Party.add(g.entry.name || 'Microfone 2'); pb = Party.d.players.find(p => p.name === (g.entry.name || 'Microfone 2')); }
-    const eb = { ...g.entry, pid: pb?.id || 'guest', id: randomString(8), date: Date.now() };
-    const sa = a.entry.score, sb = eb.score;
-    const sint = Math.max(sa, sb) ? Math.min(sa, sb) / Math.max(sa, sb) : 0;
-    const score = Math.min(100, Math.round((sa + sb) / 2 + (sa && sb ? 5 * sint : 0)));
-    a.entry.duo = eb.duo = `${a.entry.name} & ${eb.name}`;
-    Party.update(a.entry.id, { duo: a.entry.duo }); Party.record(eb);
-    const duo = { a: { entry: a.entry, parts: a.parts }, b: { entry: eb, parts: g.parts }, score, sint, song: a.entry.song };
+    const grp = a.group;
+    const res = [{ role: 'a', entry: a.entry, parts: a.parts }];
+    for (const s of grp.singers) {
+      if (s.role === 'a') continue;
+      const g = gs[s.dev]; if (!g) continue;
+      let p = Party.d.players.find(x => x.name.toLowerCase() === (s.name || '').toLowerCase());
+      if (!p) { Party.add(s.name); p = Party.d.players.find(x => x.name === s.name); }
+      res.push({ role: s.role, entry: { ...g.entry, name: s.name, pid: p?.id || 'guest', id: randomString(8), date: Date.now() }, parts: g.parts });
+    }
+    if (res.length === 1) { showResults(a.entry, a.parts, a.silent); TVLink.send({ t: 'result', entry: a.entry, parts: a.parts, silent: a.silent }); return; }
+    const sc = res.map(r => r.entry.score), mx = Math.max(...sc), mn = Math.min(...sc);
+    const sint = mx ? mn / mx : 0;
+    let score;
+    if (grp.mode === 'batalha') score = mx;
+    else score = Math.min(100, Math.round(avg(sc) + (mn ? 5 * sint : 0)));
+    const label = res.map(r => r.entry.name).join(' & ');
+    res.forEach(r => { r.entry.duo = label; r.entry.mode = grp.mode; });
+    Party.update(a.entry.id, { duo: label, mode: grp.mode });
+    res.slice(1).forEach(r => Party.record(r.entry));
+    const duo = { mode: grp.mode, singers: res, score, sint, song: a.entry.song };
     showDuoResults(duo);
     TVLink.send({ t: 'result', duo });
   }
 };
 function showDuoResults(duo) {
-  const card = (s, col) => `<div class="duocard" style="border-color:${col}">
+  const batalha = duo.mode === 'batalha';
+  const list = batalha ? [...duo.singers].sort((x, y) => y.entry.score - x.entry.score) : duo.singers;
+  const medal = ['🥇', '🥈', '🥉', '4º'];
+  const card = (s, i) => `<div class="duocard${batalha && i === 0 ? ' win' : ''}" style="border-color:${ROLE_COL[s.role]}">
+      ${batalha ? `<div class="pos">${medal[i]}</div>` : ''}
       <div class="who">${esc(s.entry.name)}</div><div class="dscore">${s.entry.score}</div>
       <div class="stars sm">${stars(starN(s.entry.score))}</div>
       <div class="mini">Ritmo ${Math.round(s.parts.presence * 100)} · Afinação ${Math.round(s.parts.tune * 100)}</div></div>`;
+  const n = duo.singers.length, kind = n === 2 ? 'dupla' : n === 3 ? 'trio' : 'quarteto';
   const ov = $('#resOv');
   ov.innerHTML = `<div class="resbox">
-    <div class="who">🎤🎤 Dueto · ${esc(duo.song)}</div>
-    <div class="sub2" style="margin:6px 0 0">Nota da dupla</div>
+    <div class="who">${batalha ? '⚔️ Batalha' : '🎤 ' + kind[0].toUpperCase() + kind.slice(1)} · ${esc(duo.song)}</div>
+    <div class="sub2" style="margin:6px 0 0">${batalha ? `Vencedor(a): <b style="color:var(--gold)">${esc(list[0].entry.name)}</b>` : `Nota do ${kind === 'dupla' ? 'da dupla' : kind}`.replace('do da', 'da')}</div>
     <div class="big" id="bigScore">0</div>
     <div class="stars" id="starsBox">${stars(starN(duo.score))}</div>
     <div class="rtitle" id="rTitle">${title(duo.score)}</div>
-    <div class="duogrid">${card(duo.a, '#ff5c8a')}${card(duo.b, '#5ce1e6')}</div>
-    <p class="sub2">Sintonia da dupla: <b style="color:var(--gold)">${Math.round(duo.sint * 100)}%</b> (quanto mais parecidas as notas, maior o bônus).</p>
+    <div class="duogrid n${n}">${list.map(card).join('')}</div>
+    ${batalha ? '' : `<p class="sub2">Sintonia: <b style="color:var(--gold)">${Math.round(duo.sint * 100)}%</b> (quanto mais parecidas as notas, maior o bônus).</p>`}
     <div class="applause">
       <b>👏 Aplauso da plateia</b>
-      <div class="sub2">${TV.on ? 'Meçam o aplauso pelo celular principal!' : 'Aplausos e gritos por 5 segundos: vale até +10 pontos para a dupla.'}</div>
+      <div class="sub2">${TV.on ? 'Meçam o aplauso pelo celular principal!' : `Aplausos e gritos por 5 segundos: vale até +10 pontos ${batalha ? 'para o vencedor' : 'para o grupo'}.`}</div>
       <button class="btn primary" id="clapBtn">Medir aplauso</button>
       <div class="meter"><i id="clapMeter"></i></div>
       <div class="sub2" id="clapRes"></div>
@@ -2107,9 +2304,9 @@ function showDuoResults(duo) {
   countUp($('#bigScore'), 0, duo.score, 1300);
   setTimeout(() => FX.confetti(duo.score >= 75 ? 200 : 90), 900);
   if (TV.on) return;
-  $('#clapBtn').onclick = () => measureApplause({ score: duo.score, ids: [duo.a.entry.id, duo.b.entry.id] });
+  $('#clapBtn').onclick = () => measureApplause({ score: duo.score, ids: batalha ? [list[0].entry.id] : duo.singers.map(s => s.entry.id) });
   $('#resRank').onclick = () => { renderParty(); $('#partyDlg').showModal(); };
-  $('#resNext').onclick = () => { TVLink.send({ t: 'close', next: Party.next()?.name || '' }); closeStage(); $('#q').value = ''; $('#q').focus(); };
+  $('#resNext').onclick = () => { TVLink.send({ t: 'close', next: Party.next()?.name || '', rank: miniRank() }); closeStage(); $('#q').value = ''; $('#q').focus(); };
 }
 
 /* ---------- modo TV e modo 2º microfone (os dois "seguem" o Spotify da festa) ---------- */
@@ -2136,7 +2333,9 @@ const TV = {
     this.code = code;
     this.idle();
     try { this.es = await Relay.subscribe(code, m => this.onMsg(m)); } catch (e) { console.warn(e); }
+    if (role === 'tv') { try { await Relay.publish(code, { t: 'tvup', from: DEV }); } catch {} }
     if (role === 'mic' && !Auth.loggedIn) this.askJoin();
+    if (role === 'mic') { Ctl.update(); setTimeout(() => Live.connect(), 1500); }
     clearInterval(this.loopT); this.loopT = setInterval(() => this.loop(), 2500);
     this.loop();
   },
@@ -2155,15 +2354,17 @@ const TV = {
     $('#tvExit').textContent = mic ? 'Sair do modo microfone' : 'Sair do modo TV';
     if (mic) {
       const g = LS.get('kk.guest', {});
-      $('#tvMsg').textContent = logged ? `${g.name || 'Microfone 2'}, você é o 2º microfone 🎤` : 'Esperando o celular principal liberar…';
-      $('#tvSub').textContent = logged ? 'Quando o anfitrião escolher um dueto, a sua parte da letra aparece aqui e a sua nota é calculada neste celular.' : `Sala ${this.code}. No celular principal vai aparecer um pedido para liberar este aparelho.`;
+      $('#tvMsg').textContent = logged ? `${g.name || 'Microfone 2'}, você é um microfone da festa 🎤` : 'Esperando o celular principal liberar…';
+      $('#tvSub').textContent = logged ? 'Quando o anfitrião escolher uma música em grupo com você, a sua parte da letra aparece aqui e a sua nota é calculada neste celular.' : `Sala ${this.code}. No celular principal vai aparecer um pedido para liberar este aparelho.`;
       $('#askAgain').hidden = logged;
     } else {
       $('#tvMsg').textContent = logged ? 'Escolha a música no celular 🎤' : 'Conecte esta TV pelo celular';
       $('#tvSub').textContent = logged ? 'Quando começar a tocar no Spotify, a letra aparece aqui.' : 'No celular, abra o Karaokê e digite o código abaixo. O login no Spotify é feito pelo celular.';
     }
     const r = this.lastResult;
-    $('#tvLast').innerHTML = r ? `Última apresentação: <b>${esc(r.name)}</b> · ${esc(r.song)} · <b style="color:var(--gold)">${r.total}</b> pontos${r.next ? `<br>Agora é a vez de <b>${esc(r.next)}</b>!` : ''}` : '';
+    const rk = this.lastRank || [];
+    $('#tvLast').innerHTML = (r ? `Última apresentação: <b>${esc(r.name)}</b> · ${esc(r.song)} · <b style="color:var(--gold)">${r.total}</b> pontos${r.next ? `<br>Agora é a vez de <b>${esc(r.next)}</b>!` : ''}` : '')
+      + (rk.length && this.role === 'tv' ? `<div class="tvrank">🏆 ${rk.map((x, i) => `<span>${['🥇', '🥈', '🥉', '4º', '5º'][i]} <b>${esc(x.name)}</b> ${x.best}</span>`).join('')}</div>` : '');
   },
   async loop() {
     if (!Auth.loggedIn || document.hidden) return;
@@ -2188,17 +2389,64 @@ const TV = {
   applySing(s) {
     St.duet = s.duet || null;
     if (St.duet && St.lines.length) buildLyricsDOM();
+    if (St.duet) showTurn(Math.max(0, St.idx));
     if (this.role === 'mic') {
-      if (!St.duet) return; // música solo: o 2º celular só acompanha a letra
-      $('#stSinger').textContent = '🎤 ' + St.duet.b.name; $('#stSinger').hidden = false;
-      if (!Score.active) Score.begin({ id: 'guest', name: St.duet.b.name, color: St.duet.b.color }, 'b');
+      const me = St.duet?.singers.find(x => x.dev === DEV);
+      if (!me) { $('#stSinger').hidden = true; return; } // este celular não canta nesta música: só acompanha a letra
+      $('#stSinger').textContent = '🎤 ' + me.name; $('#stSinger').hidden = false;
+      if (!Score.active) Score.begin({ id: 'guest', name: me.name, color: ROLE_COL[me.role] }, me.role);
       return;
     }
-    $('#stSinger').textContent = '🎤 ' + (St.duet ? `${St.duet.a.name} & ${St.duet.b.name}` : s.name); $('#stSinger').hidden = false;
-    $('#scorebar').hidden = false; $('#scorebar').classList.add('remote');
-    this.live = { a: 0, b: 0 };
-    $('#liveScore').textContent = St.duet ? '0 · 0' : '0';
-    $('#comboLbl').textContent = St.duet ? `${St.duet.a.name} · ${St.duet.b.name}` : 'pontos';
+    $('#stSinger').textContent = '🎤 ' + (St.duet ? St.duet.singers.map(x => x.name).join(' & ') : s.name); $('#stSinger').hidden = false;
+    const singers = St.duet ? St.duet.singers : [{ role: 'a', name: s.name }];
+    this.cards = {};
+    $('#tvSingers').innerHTML = singers.map(x => `<div class="tvs" data-r="${x.role}" style="--rc:${ROLE_COL[x.role]}">
+        <div class="tvs-h"><span class="tvs-n">${esc(x.name)}</span><span class="tvs-note">–</span></div>
+        <canvas class="tvs-trail"></canvas>
+        <div class="tvs-f"><div class="tvs-lv"><i></i></div><b class="tvs-sc">0</b><span class="tvs-cb"></span></div>
+        <div class="tvs-fb"></div></div>`).join('');
+    $('#tvSingers').hidden = false;
+    $('#tvSingers').querySelectorAll('.tvs').forEach(el => { this.cards[el.dataset.r] = { el, trail: [], center: null }; });
+  },
+  // nível de voz e nota de um cantor (chega ~10x por segundo pelo canal direto)
+  onLevel(m) {
+    const c = this.cards?.[m.who]; if (!c) return;
+    c.el.querySelector('.tvs-lv i').style.width = Math.round((m.l || 0) * 100) + '%';
+    c.el.classList.toggle('singing', (m.l || 0) > 0.08);
+    if (m.m != null) c.el.querySelector('.tvs-note').textContent = noteName(m.m);
+    c.trail.push({ t: performance.now(), m: m.m });
+    while (c.trail.length && c.trail[0].t < performance.now() - 5000) c.trail.shift();
+    this.drawCard(c);
+  },
+  drawCard(c) {
+    const cv = c.el.querySelector('canvas'), w = cv.clientWidth, h = cv.clientHeight; if (!w) return;
+    if (cv.width !== w) { cv.width = w; cv.height = h; }
+    const g = cv.getContext('2d'); g.clearRect(0, 0, w, h);
+    const last = c.trail.filter(p => p.m != null).slice(-1)[0];
+    if (last) c.center = c.center == null ? last.m : c.center * 0.9 + last.m * 0.1;
+    if (c.center == null) return;
+    const col = getComputedStyle(c.el).getPropertyValue('--rc').trim() || '#ffd25e';
+    g.strokeStyle = col; g.lineWidth = 4; g.lineCap = 'round'; g.beginPath();
+    let prev = null; const now = performance.now();
+    for (const p of c.trail) {
+      if (p.m == null) { prev = null; continue; }
+      const x = w - (now - p.t) / 5000 * w, y = clamp(h / 2 - (p.m - c.center) / 12 * h, 3, h - 3);
+      if (prev == null || Math.abs(p.m - prev) > 2) g.moveTo(x, y); else g.lineTo(x, y);
+      prev = p.m;
+    }
+    g.stroke();
+  },
+  onFb(m) {
+    const c = this.cards?.[m.who || 'a'];
+    if (c) {
+      c.el.querySelector('.tvs-sc').textContent = m.live;
+      c.el.querySelector('.tvs-cb').textContent = m.combo >= 2 ? `combo ×${m.combo}` : '';
+      const fb = c.el.querySelector('.tvs-fb'); fb.className = 'tvs-fb show lvl-' + m.lvl; fb.textContent = m.txt; void fb.offsetWidth;
+      c.el.classList.toggle('fire', m.combo >= 5);
+    }
+    const many = St.duet && St.duet.singers.length > 1;
+    showFeedback((many && m.name ? m.name + ': ' : '') + m.txt + (m.combo >= 3 ? `  ×${m.combo}` : ''), m.lvl);
+    FX.onFeedback(m.lvl, m.combo);
   },
   onMsg(m) {
     if (m.from === DEV) return;
@@ -2207,11 +2455,15 @@ const TV = {
         if (this.role === 'tv' && m.to && m.to !== 'tv') return;
         if (this.role === 'mic' && m.to !== DEV) return;
         Auth.clientId = m.clientId; LS.set('kk.token', m.tok);
-        toast(this.role === 'mic' ? 'Liberado! Este celular já é o 2º microfone.' : 'Celular conectado! Esta TV já está no Spotify.');
+        toast(this.role === 'mic' ? 'Liberado! Este celular já é um microfone da festa.' : 'Celular conectado! Esta TV já está no Spotify.');
         if (this.role === 'mic') TVLink.send({ t: 'ready', name: LS.get('kk.guest', {}).name });
         updateAuthUI(); this.idle(); this.loop();
         break;
       case 'end': if (this.role === 'mic' && Score.active) Score.finish(); break;
+      case 'tvup': if (this.role === 'mic') { LS.set('kk.hasTv', true); Ctl.update(); Live.connect(true); } break;
+      case 'rtc-offer': if (this.role === 'tv') Live.onOffer(m); break;
+      case 'rtc-answer': if (this.role === 'mic' && m.to === DEV) Live.onAnswer(m); break;
+      case 'lvl': if (this.role === 'tv' && St.open) this.onLevel(m); break;
       case 'join': case 'ready': case 'gres': break;
       case 'hello': toast('📱 Celular conectado a esta TV!'); break;
       case 'track': {
@@ -2227,21 +2479,18 @@ const TV = {
       }
       case 'off': if (St.open && offKey() === m.key) { St.offset = m.offset; renderOffset(); } { const o = LS.get('kk.offsets', {}); o[m.key] = m.offset; LS.set('kk.offsets', o); } break;
       case 'sing':
+        if (this.role === 'mic' && m.tv) { if (!LS.get('kk.hasTv', false)) { LS.set('kk.hasTv', true); Live.connect(true); } Ctl.update(); }
         this.singer = m; $('#resOv').hidden = true; FX.reset();
         if (St.open && (!m.uri || St.playTrack?.uri === m.uri || St.track?.uri === m.uri)) this.applySing(m);
         break;
       case 'fb':
         if (!St.open || this.role === 'mic') return;
-        showFeedback(m.txt, m.lvl); FX.onFeedback(m.lvl, m.combo);
-        if (St.duet) {
-          this.live = this.live || { a: 0, b: 0 }; this.live[m.who || 'a'] = m.live;
-          $('#liveScore').textContent = `${this.live.a} · ${this.live.b}`;
-        } else { $('#liveScore').textContent = m.live; $('#comboLbl').textContent = m.combo >= 2 ? `combo ×${m.combo}` : 'pontos'; }
+        this.onFb(m);
         break;
       case 'result':
         if (this.role === 'mic') return;
-        this.lastResult = m.duo ? { name: m.duo.a.entry.name + ' & ' + m.duo.b.entry.name, song: m.duo.song, total: m.duo.score } : { ...m.entry };
-        $('#scorebar').hidden = true; $('#turn').hidden = true;
+        this.lastResult = m.duo ? { name: m.duo.singers.map(x => x.entry.name).join(' & '), song: m.duo.song, total: m.duo.score } : { ...m.entry };
+        $('#scorebar').hidden = true; $('#turn').hidden = true; $('#tvSingers').hidden = true;
         if (!St.open) { $('#stage').hidden = false; St.open = true; $('#tvIdle').hidden = true; }
         if (m.duo) showDuoResults(m.duo); else showResults(m.entry, m.parts, m.silent);
         break;
@@ -2253,7 +2502,8 @@ const TV = {
       case 'close':
         if (this.lastResult) this.lastResult.next = m.next;
         if (Score.active) Score.cancel();
-        $('#resOv').hidden = true; this.singer = null; St.duet = null; $('#stSinger').hidden = true; $('#turn').hidden = true;
+        $('#resOv').hidden = true; this.singer = null; St.duet = null; $('#stSinger').hidden = true; $('#turn').hidden = true; $('#tvSingers').hidden = true;
+        if (m.rank) this.lastRank = m.rank;
         St.open = false; $('#stage').hidden = true; this.idle();
         break;
     }
@@ -2408,9 +2658,10 @@ function wire() {
   $('#partyTv').onclick = () => { $('#partyDlg').close(); openTv(); };
   $('#tvClose').onclick = () => $('#tvDlg').close();
   $('#tvForm').addEventListener('submit', e => { e.preventDefault(); TVLink.pair($('#tvCodeIn').value); });
-  $('#tvUnlink').onclick = () => { LS.del('kk.tv.link'); LS.del('kk.peer'); try { TVLink.es?.close?.(); } catch {} TVLink.es = null; renderTvDlg(); toast('Sala desconectada.'); };
+  $('#tvUnlink').onclick = () => { LS.del('kk.tv.link'); LS.del('kk.peers'); LS.set('kk.hasTv', false); Ctl.update(); try { TVLink.es?.close?.(); } catch {} TVLink.es = null; renderTvDlg(); toast('Sala desconectada.'); };
   $('#tvTest').onclick = async () => { await TVLink.send({ t: 'hello' }); toast('Mensagem enviada. Deve aparecer um aviso na TV.'); };
   $('#tvModeBtn').onclick = () => { LS.set('kk.tvmode', true); location.href = REDIRECT; };
+  $('#tvStatus').addEventListener('click', e => { const b = e.target.closest('[data-unpeer]'); if (b) { TVLink.removePeer(b.dataset.unpeer); renderTvDlg(); } });
   $('#roomBtn').onclick = () => { if (!Auth.loggedIn) { toast('Conecte este celular ao Spotify primeiro.', 'err'); return; } TVLink.createRoom(); renderTvDlg(); };
 
   // 2º microfone (no celular convidado)
@@ -2425,27 +2676,33 @@ function wire() {
   });
   $('#askAgain').onclick = () => TV.askJoin();
   $('#stMic').onclick = () => $('#micOn').click();
+  $('#ctlLyrToggle').onclick = () => { LS.set('kk.ctlLyrics', !Ctl.showLyrics); Ctl.update(); };
   $('#micOn').onclick = async () => {
     try {
       await Mic.start();
       $('#stMic').hidden = true;
       $('#micOn').textContent = '✅ Microfone ligado'; $('#micOn').disabled = true;
-      $('#micHint').textContent = 'Tudo pronto. Quando o dueto começar, a sua parte da letra aparece aqui.';
+      $('#micHint').textContent = 'Tudo pronto. Quando a música em grupo começar, a sua parte da letra aparece aqui.';
       clearInterval(TV.micT); TV.micT = setInterval(() => { const a = Mic.read(); if (a) $('#micLvl').style.width = clamp(a.rms * 600, 0, 100) + '%'; }, 80);
     } catch { toast('O navegador não liberou o microfone. Confira as permissões do site.', 'err'); }
   };
 
   // dueto (no celular principal)
   $('#duoGo').onclick = () => {
-    const d = Party.d, pa = d.players.find(p => p.id === $('#duoA').value), pb = d.players.find(p => p.id === $('#duoB').value);
-    if (!pa || !pb || pa.id === pb.id) { toast('Escolha duas pessoas diferentes.', 'err'); return; }
+    const d = Party.d, sels = [...$('#grpRows').querySelectorAll('select')];
+    const chosen = sels.map(el => ({ dev: el.dataset.dev, p: d.players.find(p => p.id === el.value) })).filter(x => x.p);
+    if (!chosen.length || chosen[0].dev !== 'host') { toast('Escolha quem canta neste celular.', 'err'); return; }
+    if (chosen.length < 2) { toast('Escolha pelo menos uma pessoa num microfone extra.', 'err'); return; }
+    if (new Set(chosen.map(x => x.p.id)).size !== chosen.length) { toast('Cada pessoa só pode estar em um celular.', 'err'); return; }
     $('#singerDlg').close();
     const { track, opts } = pendingSong; pendingSong = null;
     openStage(track, opts);
-    St.duet = { mode: $('#duoMode').value, a: { name: pa.name, color: pa.color }, b: { name: pb.name, color: pb.color } };
+    St.duet = { mode: $('#duoMode').value, singers: chosen.map((x, i) => ({ role: 'abcd'[i], dev: x.dev === 'host' ? DEV : x.dev, name: x.p.name, color: ROLE_COL['abcd'[i]] })) };
     if (St.lines.length) buildLyricsDOM();
-    Score.begin(pa, 'a');
+    showTurn(0);
+    Score.begin(chosen[0].p, 'a');
   };
+
   $('#tvExit').onclick = () => TV.stop();
   $('#tvLoginHere').onclick = () => { $('#tvIdle').hidden = true; document.body.classList.remove('tv'); $('#setup').hidden = false; toast('Faça o login normalmente. Depois a TV volta ao modo TV.'); };
 
@@ -2498,6 +2755,8 @@ function openLrc() {
   if (LS.get('kk.guest', null)?.code) { TV.start('mic'); return; }
   if (TV.detect()) { TV.start('tv'); return; }
   TVLink.listen();
+  Ctl.update();
+  setTimeout(() => Live.connect(), 1500);
   if (Auth.loggedIn) {
     Player.initSDK();
     refreshDevices();
@@ -2506,7 +2765,7 @@ function openLrc() {
 })();
 
 // exposto só para testes no console
-window.__karaoke = { parseLRC, cleanTitle, origArtist, Player, St, Score, Mic, Party, applyLyrics, tuning, keyFit, Lib, FX, TV, TVLink, Relay };
+window.__karaoke = { Live, Ctl, parseLRC, cleanTitle, origArtist, Player, St, Score, Mic, Party, applyLyrics, tuning, keyFit, Lib, FX, TV, TVLink, Relay };
 })();
 </script>
 </body>

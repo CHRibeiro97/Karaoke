@@ -44,25 +44,64 @@ As animações seguem a ideia dos jogos de ritmo, com visual próprio do app:
 - **Buscar letra**: no palco, toque em **Letra…**. O app já busca com o nome da música, e você pode reescrever do jeito que quiser e escolher o resultado certo. Cada resultado mostra a duração e se a letra é sincronizada.
 - **📚 Minha biblioteca** (em ⚙ ou em 🏆 Festa): guarda as letras escolhidas, coladas e sincronizadas no toque, além dos ajustes de sincronia. Dá para **exportar** um arquivo, **compartilhar** pelo WhatsApp e outros apps, ou **importar** no outro aparelho. Importar só soma, nunca apaga.
 
-## Dueto com dois celulares
+## Cantar em grupo: dueto, trio, quarteto ou batalha (até 4 celulares)
 
-Um segundo celular pode virar o **2º microfone**. Cada celular calcula a nota de quem está cantando nele.
+Além do celular principal, até **3 celulares extras** podem virar microfones. Cada celular calcula a nota de quem está cantando nele.
 
-1. **Sala da festa**: se tiver TV conectada, o código da TV já é a sala. Sem TV, vá em **📺 Conectar à TV → Criar sala para dueto** no celular principal.
-2. No 2º celular, abra o endereço do app, toque em **📱 Entrar como 2º microfone**, digite o seu nome e o código da sala. Ele não precisa de conta no Spotify.
-3. No celular principal, aparece um pedido de liberação. Ao aceitar, o login é passado para o 2º celular (o Spotify pode piscar a tela por um segundo).
-4. No 2º celular, toque em **🎤 Ativar microfone**. Ele fica esperando.
-5. Ao escolher uma música, a janela "Quem vai cantar?" passa a ter **🎤🎤 Dueto**: escolha quem canta em cada celular e como dividir:
-   - **Revezando as partes**: a letra é dividida em blocos (pelas pausas da música). A pessoa A canta um bloco, a B canta o seguinte, e o último bloco é dos dois juntos.
-   - **Os dois cantam tudo**.
-6. Na tela, cada frase vem marcada com a cor de quem canta (rosa = celular principal, azul = 2º celular, dourado = juntos), e um aviso mostra "Vez de…".
-7. No fim, sai a **nota de cada um** e a **nota da dupla**: a média das duas, mais um bônus de até 5 pontos por *sintonia* (quanto mais parecidas as notas, maior o bônus). O aplauso vale para a dupla. A TV mostra tudo isso.
+1. **Sala da festa**: se tiver TV conectada, o código da TV já é a sala. Sem TV, vá em **📺 Conectar à TV → Criar sala da festa** no celular principal.
+2. Em cada celular extra, abra o endereço do app, toque em **📱 Entrar como microfone extra**, digite o nome e o código da sala. Esses celulares não precisam de conta no Spotify.
+3. No celular principal, aparece um pedido de liberação para cada um. Ao aceitar, o login é passado para aquele celular (o Spotify pode piscar a tela por um segundo).
+4. Em cada celular extra, toque em **🎤 Ativar microfone**. Ele fica esperando.
+5. Ao escolher uma música, a janela "Quem vai cantar?" passa a ter **🎤🎤 Cantar em grupo**. Escolha quem canta em cada celular (ou "não canta") e o modo:
+   - **Revezando as partes**: a letra é dividida em blocos (pelas pausas da música) e passa de um cantor para o outro em rodízio. O último bloco é de todos.
+   - **Todos cantam tudo**: vale a nota do grupo.
+   - **⚔️ Batalha**: todos cantam tudo e vence a maior nota, com pódio 🥇🥈🥉.
+6. Na tela, cada frase vem marcada com a cor de quem canta: rosa = celular principal, azul = 1º extra, verde = 2º extra, roxo = 3º extra e dourado = todos. Um aviso mostra "Vez de…".
+7. No fim, sai a **nota de cada um** e:
+   - no revezamento e no "todos": a **nota do grupo**, que é a média mais até 5 pontos de bônus por *sintonia* (quanto mais parecidas as notas, maior o bônus);
+   - na batalha: o **pódio**, e a nota grande é a do vencedor.
 
-As notas entram no ranking de cada participante, marcadas como dueto.
+   O aplauso vale para o grupo ou para o vencedor da batalha. A TV mostra tudo isso.
+
+As notas entram no ranking de cada participante, marcadas com o grupo e o modo. Os microfones conectados aparecem em **📺 Conectar à TV**, e dá para remover algum por lá.
+
+## App instalado na TV Samsung (modo desenvolvedor)
+
+O arquivo **`Karaoke.wgt`** (na pasta deste projeto, com o código em `tv-app/`) instala o Karaokê como um app da TV, com ícone na lista de apps e abrindo em tela cheia, sem a barra do navegador. Ele só abre o endereço do GitHub Pages em modo TV, então **as atualizações do `index.html` no GitHub chegam na TV sozinhas**, sem reinstalar.
+
+Você precisa de um computador (Windows, Mac ou Linux) na mesma rede Wi-Fi da TV, só para a instalação.
+
+1. **Descubra o IP do computador**: no Windows, rode `ipconfig` no Prompt de Comando; no Mac, veja em Ajustes → Rede.
+2. **Ligue o modo desenvolvedor na TV**: abra **Apps** e, com o controle, digite **1 2 3 4 5**. Ative o **Developer mode**, digite o IP do computador, confirme e **desligue e ligue a TV**.
+3. **Instale o Apps2Samsung** no computador. É gratuito e de código aberto: <https://github.com/Jellyfin2Samsung/Samsung-Jellyfin-Installer> (baixe a versão do seu sistema em *Releases*).
+4. Abra o Apps2Samsung, escolha a sua TV, selecione **app próprio / custom .wgt**, aponte para o `Karaoke.wgt` e clique em instalar. Se pedir, entre com uma conta Samsung, que é usada para assinar o app para a sua TV.
+5. Pronto: o **Karaokê** aparece na lista de apps da TV.
+
+Caminho alternativo: o Tizen Studio, da Samsung, com o comando `tizen install -n Karaoke.wgt -t <nome-da-TV>`. Ele exige criar um certificado Samsung no Certificate Manager.
+
+Bom saber:
+
+- O app instalado tem as mesmas limitações do navegador da TV: não acessa microfone e não toca o Spotify sozinho. O som vem do app do Spotify da TV, e os microfones são os celulares.
+- Apps instalados assim são assinados com um certificado que vence. Quando vencer, reinstale pelo Apps2Samsung.
+- No controle remoto: **OK** toca e pausa, **◀ ▶** voltam e avançam 5 s, **▲ ▼** ajustam a sincronia, e **Voltar** fecha o app.
+- **Bluetooth** não é usado: o sistema da TV não oferece Bluetooth de forma garantida para apps instalados, e o navegador do celular não consegue se anunciar como aparelho Bluetooth. A conexão entre os aparelhos é pelo Wi-Fi/internet, com o código da sala.
 
 ## Modo TV (Samsung e outras Smart TVs)
 
-A TV vira a tela do show, e o celular vira o microfone e o controle:
+Com uma TV conectada, os papéis ficam assim:
+
+| Aparelho | Função |
+|---|---|
+| **TV** | Mostra o palco (letra, pista de notas, Micão, plateia, confete) e toca o som pelo app do Spotify da TV. Embaixo, mostra **um cartão por cantor** com o nome, a nota musical que ele está cantando, a trilha da voz, o nível do microfone, os pontos, o combo e os avisos "Perfeito!/Ótimo!". |
+| **Celular principal** | Funciona como **controle e microfone**. Nele você escolhe as músicas e quem canta, toca e pausa, avança, ajusta a sincronia e mede o aplauso. Durante a música, ele **não mostra a letra**: mostra um anel que pulsa com a voz, a nota musical, os pontos e um aviso grande de **"🎤 Sua vez — cante!"**, **"Prepare-se"** ou **"⏸ Vez de Ana"**. |
+| **Celulares extras** | Só microfone: mostram o mesmo anel, os pontos e o aviso de vez. |
+
+- Se quiser ver a letra no celular mesmo assim, toque em **"Ver letra neste celular também"**.
+- Com a TV conectada, o app escolhe a **TV como aparelho de som** automaticamente, se o app do Spotify da TV estiver aberto. Se você escolher outro aparelho na lista, o app passa a respeitar a sua escolha.
+- **Conexão em tempo real**: cada celular abre um canal direto (WebRTC) com a TV, e o selo **"📺 TV ao vivo"** aparece no celular. Por ele vão o nível da voz (10 vezes por segundo) e o resultado de cada frase. Se a TV ou a rede não permitirem esse canal, o selo mostra **"modo econômico"**: a TV continua funcionando, mas as notas chegam a cada 12–20 s e o nível de voz ao vivo não aparece.
+- Entre uma música e outra, a TV mostra o ranking da noite (top 5) e de quem é a próxima vez.
+
+Para conectar:
 
 1. Na TV, abra o navegador **Internet** e acesse o endereço do app. A TV entra sozinha no **modo TV** e mostra um código de 6 letras. Vale salvar o endereço nos favoritos.
 2. No celular, toque em **🏆 Festa → 📺 Conectar à TV** e digite o código. O celular faz o login do Spotify na TV, então não precisa digitar senha com o controle remoto.
@@ -76,7 +115,7 @@ Limitações:
 - O navegador da TV não acessa microfone e não toca o Spotify sozinho. Por isso, o som vem do app do Spotify da TV e o microfone é o do celular.
 - O modo karaokê da Samsung (microfone pelo celular via SmartThings) é exclusivo do app Stingray Karaoke, e este app não consegue usar esse recurso. Por isso, o app não amplifica a sua voz nas caixas da TV.
 - Se a música parar quando você sai do app do Spotify da TV para o navegador, toque a música pelo celular numa caixa de som Bluetooth, ou espelhe o som do celular na TV.
-- A TV e o celular conversam pelo serviço público gratuito **ntfy.sh**. As mensagens são criptografadas com o código da TV e só levam o login, a letra, as notas e os nomes. O serviço limita a quantidade de mensagens, por isso a nota ao vivo na TV atualiza a cada ~12 s.
+- A TV e os celulares se encontram pelo serviço público gratuito **ntfy.sh**, com mensagens criptografadas pelo código da sala. Por ele vão só o login, a letra, os nomes, os resultados e o "aperto de mão" do canal direto. As mensagens rápidas (voz e frase a frase) vão pelo canal direto entre o celular e a TV.
 
 Atalhos no computador: `espaço` toca/pausa, `←`/`→` voltam/avançam 5 s, `[`/`]` ajustam a sincronia, `F` liga a tela cheia e `Esc` sai do palco.
 
@@ -144,6 +183,9 @@ Abra o app, cole o Client ID e clique em **Conectar ao Spotify**. O login usa o 
 | A TV não sai da tela do código | Confira se digitou o código certo e se o celular está conectado ao Spotify. Se a TV foi reiniciada, o código continua o mesmo. |
 | A TV mostra a letra, mas sem som | Abra o app do Spotify da TV e escolha a TV como aparelho no palco do celular. |
 | O computador abriu no modo TV sem querer | Na tela da TV, toque em "Sair do modo TV". |
-| O pedido do 2º microfone não aparece | No 2º celular, toque em "Pedir para entrar de novo". O celular principal precisa estar com o app aberto e conectado à sala. |
-| O 2º celular não pontua | Toque em "🎤 Ativar microfone" e libere o microfone no navegador. A tela dele precisa ficar acesa. |
-| A opção de dueto não aparece | O 2º celular precisa ter sido liberado, e precisam existir pelo menos 2 participantes no 🏆 Festa. |
+| O pedido do microfone extra não aparece | No celular extra, toque em "Pedir para entrar de novo". O celular principal precisa estar com o app aberto e conectado à sala. |
+| Um celular extra não pontua | Toque em "🎤 Ativar microfone" e libere o microfone no navegador. A tela dele precisa ficar acesa. |
+| A opção de cantar em grupo não aparece | Pelo menos um celular extra precisa ter sido liberado, e precisam existir pelo menos 2 participantes no 🏆 Festa. |
+| O celular mostra "TV (modo econômico)" | O canal direto não abriu. Confira se a TV e os celulares estão no mesmo Wi-Fi e reabra o app no celular. Redes de convidados ou com "isolamento de clientes" bloqueiam esse canal. |
+| O celular parou de mostrar a letra | Isso é esperado com a TV conectada: a letra fica na TV. Para ver no celular também, toque em "Ver letra neste celular também". |
+| O Apps2Samsung não encontra a TV | Confira se a TV está em modo desenvolvedor com o IP certo do computador e se os dois estão no mesmo Wi-Fi. Depois de mudar o IP, desligue e ligue a TV. |
